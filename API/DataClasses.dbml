@@ -2,74 +2,30 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-R0HL87E\SQLEXPRESS;Initial Catalog=SFE;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SFEConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Clients" Member="Clients">
     <Type Name="Client">
-      <Column Name="idClient" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="lastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="country" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="address1" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="idClient" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="province" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="address1" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
       <Column Name="address2" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
-      <Column Name="province" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="zone" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="latitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="longitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="phone1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="phone2" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="timestamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="FK_clientType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Client_Visit" Member="Visits" ThisKey="idClient" OtherKey="FK_client" Type="Visit" />
-      <Association Name="ClientsType_Client" Member="ClientsType" ThisKey="FK_clientType" OtherKey="idClientType" Type="ClientsType" IsForeignKey="true" />
+      <Column Name="zone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ClientsTypesidClientType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ClientsType_Client" Member="ClientsType" ThisKey="ClientsTypesidClientType" OtherKey="idClientType" Type="ClientsType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ClientsTypes" Member="ClientsTypes">
     <Type Name="ClientsType">
-      <Column Name="idClientType" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="ClientsType_Client" Member="Clients" ThisKey="idClientType" OtherKey="FK_clientType" Type="Client" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Products" Member="Products">
-    <Type Name="Product">
-      <Column Name="idProduct" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FK_visit" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="Visit_Product" Member="Visit" ThisKey="FK_visit" OtherKey="idVisit" Type="Visit" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Sellers" Member="Sellers">
-    <Type Name="Seller">
-      <Column Name="idSeller" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="lastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="country" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="address1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="address2" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="province" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="zone" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="phone1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="phone2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="timestamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Seller_Visit" Member="Visits" ThisKey="idSeller" OtherKey="FK_seller" Type="Visit" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Visits" Member="Visits">
-    <Type Name="Visit">
-      <Column Name="idVisit" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="reaction" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="comment" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
-      <Column Name="latitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="longitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="timestamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="FK_seller" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Visit_Product" Member="Products" ThisKey="idVisit" OtherKey="FK_visit" Type="Product" />
-      <Association Name="Client_Visit" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
-      <Association Name="Seller_Visit" Member="Seller" ThisKey="FK_seller" OtherKey="idSeller" Type="Seller" IsForeignKey="true" />
+      <Column Name="idClientType" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="ClientsType_Client" Member="Clients" ThisKey="idClientType" OtherKey="ClientsTypesidClientType" Type="Client" />
     </Type>
   </Table>
 </Database>

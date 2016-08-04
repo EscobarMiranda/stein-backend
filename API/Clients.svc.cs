@@ -25,18 +25,31 @@ namespace API
             }
         }
 
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Client get(int id)
+        public bool Delete(string id)
         {
             try
             {
-                return (from client in dataClasses.Clients
-                        where client.idClient == id
+                Client tmpClient = (from client in dataClasses.Clients
+                                               where client.idClient == int.Parse(id)
+                                               select client).Single();
+                tmpClient.status = false; // not removed, only the state is changed
+                dataClasses.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public Client Get(string id)
+        {
+            try
+            {
+                Client tmpClient = (from client in dataClasses.Clients
+                        where client.idClient == int.Parse(id)
                         select client).Single();
+                return tmpClient;
             }
             catch
             {
@@ -44,7 +57,7 @@ namespace API
             }
         }
 
-        public List<Client> getList()
+        public List<Client> GetList()
         {
             try
             {
@@ -56,11 +69,6 @@ namespace API
             {
                 return null;
             }
-        }
-
-        public bool Update(Client client)
-        {
-            throw new NotImplementedException();
         }
     }
 }
