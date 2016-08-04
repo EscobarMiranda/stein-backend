@@ -1,4 +1,5 @@
-﻿using sfe.dal;
+﻿
+using sfe.dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,17 @@ namespace sfe.bll
 {
     public class ClientLogic
     {
+        private static DataClassesDataContext dataClasses = new DataClassesDataContext();
         public static List<Client> getClients() {
-
-            List<Client> clients = new List<Client>();
-            clients.Add(new Client
+            try
             {
-                Id = 1,
-                Name = "Uno"
-            });
-
-            return clients.Where(c => c.Id > 0).ToList();
-
+                return (from clients in dataClasses.Clients
+                        select clients).ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
         
 

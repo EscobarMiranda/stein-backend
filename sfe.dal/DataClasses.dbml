@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SFE" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-R0HL87E\SQLEXPRESS;Initial Catalog=SFE;Integrated Security=True" SettingsObjectName="sfe.dal.Properties.Settings" SettingsPropertyName="SFEConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Clients" Member="Clients">
+    <Type Name="Client">
+      <Column Name="idClient" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="province" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="address1" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="address2" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="latitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="zone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ClientsTypesidClientType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="ClientsType_Client" Member="ClientsType" ThisKey="ClientsTypesidClientType" OtherKey="idClientType" Type="ClientsType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientsTypes" Member="ClientsTypes">
+    <Type Name="ClientsType">
+      <Column Name="idClientType" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="ClientsType_Client" Member="Clients" ThisKey="idClientType" OtherKey="ClientsTypesidClientType" Type="Client" />
+    </Type>
+  </Table>
+</Database>
