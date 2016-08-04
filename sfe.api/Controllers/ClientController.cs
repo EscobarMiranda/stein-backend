@@ -17,9 +17,9 @@ namespace sfe.api.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public Client Get(int id)
         {
-            return "value";
+            return bll.ClientLogic.getClient(id);
         }
 
         // POST api/<controller>

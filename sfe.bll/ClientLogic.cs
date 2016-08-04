@@ -15,6 +15,7 @@ namespace sfe.bll
             try
             {
                 return (from clients in dataClasses.Clients
+                        where clients.status == true
                         select clients).ToList();
             }
             catch
@@ -22,7 +23,20 @@ namespace sfe.bll
                 return null;
             }
         }
-        
+
+        public static Client getClient(int id)
+        {
+            try
+            {
+                return (from client in dataClasses.Clients
+                        where client.idClient == id
+                        select client).Single();
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 }
