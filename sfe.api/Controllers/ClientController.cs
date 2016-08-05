@@ -13,23 +13,25 @@ namespace sfe.api.Controllers
         // GET api/<controller>
         public IEnumerable<Client> Get()
         {
-            return bll.ClientLogic.getClients();
+            return bll.ClientLogic.Get();
         }
 
         // GET api/<controller>/5
         public Client Get(int id)
         {
-            return bll.ClientLogic.getClient(id);
+            return bll.ClientLogic.Get(id);
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post(Client client)
         {
+            bll.ClientLogic.Post(client);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(Client client)
         {
+            bll.ClientLogic.Put(client);
         }
 
         // DELETE api/<controller>/5

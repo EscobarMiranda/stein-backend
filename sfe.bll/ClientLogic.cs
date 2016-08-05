@@ -10,12 +10,12 @@ namespace sfe.bll
 {
     public class ClientLogic
     {
-        private static DataClassesDataContext dataClasses = new DataClassesDataContext();
-        public static List<Client> getClients() {
+        private static DataClassesDataContext db = new DataClassesDataContext();
+        public static List<Client> Get() {
             try
             {
-                return (from clients in dataClasses.Clients
-                        where clients.status == true
+                return (from clients in db.Clients
+                        where clients.active == true
                         select clients).ToList();
             }
             catch
@@ -24,11 +24,11 @@ namespace sfe.bll
             }
         }
 
-        public static Client getClient(int id)
+        public static Client Get(int id)
         {
             try
             {
-                return (from client in dataClasses.Clients
+                return (from client in db.Clients
                         where client.idClient == id
                         select client).Single();
             }
@@ -38,5 +38,17 @@ namespace sfe.bll
             }
         }
 
+        public static void Post(Client client)
+        {
+            try
+            {
+                db.Clients.InsertOnSubmit(client);
+                db.SubmitChanges();
+            }
+            catch
+            {
+                throw new Exception(); // TODO: custom exception
+            }
+        }
     }
 }

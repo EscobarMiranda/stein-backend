@@ -165,6 +165,8 @@ namespace sfe.dal
 		
 		private string _phone2;
 		
+		private bool _active;
+		
 		private EntitySet<SalesBook> _SalesBooks;
 		
     #region Extensibility Method Definitions
@@ -201,6 +203,8 @@ namespace sfe.dal
     partial void Onphone1Changed();
     partial void Onphone2Changing(string value);
     partial void Onphone2Changed();
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
     #endregion
 		
 		public Agent()
@@ -509,6 +513,26 @@ namespace sfe.dal
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_SalesBook", Storage="_SalesBooks", ThisKey="idAgent", OtherKey="FK_agent")]
 		public EntitySet<SalesBook> SalesBooks
 		{
@@ -561,13 +585,13 @@ namespace sfe.dal
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private long _idSalesBook;
+		private int _idSalesBook;
 		
 		private int _FK_agent;
 		
 		private int _FK_client;
 		
-		private byte _FK_reaction;
+		private int _FK_reaction;
 		
 		private string _comment;
 		
@@ -589,13 +613,13 @@ namespace sfe.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidSalesBookChanging(long value);
+    partial void OnidSalesBookChanging(int value);
     partial void OnidSalesBookChanged();
     partial void OnFK_agentChanging(int value);
     partial void OnFK_agentChanged();
     partial void OnFK_clientChanging(int value);
     partial void OnFK_clientChanged();
-    partial void OnFK_reactionChanging(byte value);
+    partial void OnFK_reactionChanging(int value);
     partial void OnFK_reactionChanged();
     partial void OncommentChanging(string value);
     partial void OncommentChanged();
@@ -616,8 +640,8 @@ namespace sfe.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idSalesBook", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long idSalesBook
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idSalesBook", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idSalesBook
 		{
 			get
 			{
@@ -684,8 +708,8 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_reaction", DbType="TinyInt NOT NULL")]
-		public byte FK_reaction
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_reaction", DbType="Int NOT NULL")]
+		public int FK_reaction
 		{
 			get
 			{
@@ -896,7 +920,7 @@ namespace sfe.dal
 					}
 					else
 					{
-						this._FK_reaction = default(byte);
+						this._FK_reaction = default(int);
 					}
 					this.SendPropertyChanged("Reaction");
 				}
@@ -976,7 +1000,9 @@ namespace sfe.dal
 		
 		private string _phone2;
 		
-		private byte _FK_clientType;
+		private bool _active;
+		
+		private int _FK_clientType;
 		
 		private EntitySet<SalesBook> _SalesBooks;
 		
@@ -1020,7 +1046,9 @@ namespace sfe.dal
     partial void Onphone1Changed();
     partial void Onphone2Changing(string value);
     partial void Onphone2Changed();
-    partial void OnFK_clientTypeChanging(byte value);
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
+    partial void OnFK_clientTypeChanging(int value);
     partial void OnFK_clientTypeChanged();
     #endregion
 		
@@ -1371,8 +1399,28 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_clientType", DbType="TinyInt NOT NULL")]
-		public byte FK_clientType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_clientType", DbType="Int NOT NULL")]
+		public int FK_clientType
 		{
 			get
 			{
@@ -1435,7 +1483,7 @@ namespace sfe.dal
 					}
 					else
 					{
-						this._FK_clientType = default(byte);
+						this._FK_clientType = default(int);
 					}
 					this.SendPropertyChanged("ClientType");
 				}
@@ -1481,7 +1529,7 @@ namespace sfe.dal
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private byte _idClientType;
+		private int _idClientType;
 		
 		private string _name;
 		
@@ -1491,7 +1539,7 @@ namespace sfe.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidClientTypeChanging(byte value);
+    partial void OnidClientTypeChanging(int value);
     partial void OnidClientTypeChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
@@ -1503,8 +1551,8 @@ namespace sfe.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClientType", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public byte idClientType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClientType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idClientType
 		{
 			get
 			{
@@ -1595,11 +1643,13 @@ namespace sfe.dal
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private long _idProduct;
+		private int _idProduct;
 		
 		private string _name;
 		
-		private long _FK_salesBook;
+		private int _FK_salesBook;
+		
+		private bool _active;
 		
 		private EntityRef<SalesBook> _SalesBook;
 		
@@ -1607,12 +1657,14 @@ namespace sfe.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidProductChanging(long value);
+    partial void OnidProductChanging(int value);
     partial void OnidProductChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OnFK_salesBookChanging(long value);
+    partial void OnFK_salesBookChanging(int value);
     partial void OnFK_salesBookChanged();
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
     #endregion
 		
 		public Product()
@@ -1621,8 +1673,8 @@ namespace sfe.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProduct", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long idProduct
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProduct", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idProduct
 		{
 			get
 			{
@@ -1661,8 +1713,8 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_salesBook", DbType="BigInt NOT NULL")]
-		public long FK_salesBook
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_salesBook", DbType="Int NOT NULL")]
+		public int FK_salesBook
 		{
 			get
 			{
@@ -1681,6 +1733,26 @@ namespace sfe.dal
 					this._FK_salesBook = value;
 					this.SendPropertyChanged("FK_salesBook");
 					this.OnFK_salesBookChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
 				}
 			}
 		}
@@ -1712,7 +1784,7 @@ namespace sfe.dal
 					}
 					else
 					{
-						this._FK_salesBook = default(long);
+						this._FK_salesBook = default(int);
 					}
 					this.SendPropertyChanged("SalesBook");
 				}
@@ -1746,7 +1818,7 @@ namespace sfe.dal
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private byte _idReaction;
+		private int _idReaction;
 		
 		private string _description;
 		
@@ -1756,7 +1828,7 @@ namespace sfe.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidReactionChanging(byte value);
+    partial void OnidReactionChanging(int value);
     partial void OnidReactionChanged();
     partial void OndescriptionChanging(string value);
     partial void OndescriptionChanged();
@@ -1768,8 +1840,8 @@ namespace sfe.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idReaction", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public byte idReaction
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idReaction", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idReaction
 		{
 			get
 			{

@@ -17,15 +17,16 @@
       <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Agent_SalesBook" Member="SalesBooks" ThisKey="idAgent" OtherKey="FK_agent" Type="SalesBook" />
     </Type>
   </Table>
   <Table Name="dbo.SalesBook" Member="SalesBooks">
     <Type Name="SalesBook">
-      <Column Name="idSalesBook" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idSalesBook" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FK_agent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FK_reaction" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="FK_reaction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="comment" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
@@ -55,29 +56,31 @@
       <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="FK_clientType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FK_clientType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Client_SalesBook" Member="SalesBooks" ThisKey="idClient" OtherKey="FK_client" Type="SalesBook" />
       <Association Name="ClientType_Client" Member="ClientType" ThisKey="FK_clientType" OtherKey="idClientType" Type="ClientType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ClientTypes" Member="ClientTypes">
     <Type Name="ClientType">
-      <Column Name="idClientType" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idClientType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="ClientType_Client" Member="Clients" ThisKey="idClientType" OtherKey="FK_clientType" Type="Client" />
     </Type>
   </Table>
   <Table Name="dbo.Products" Member="Products">
     <Type Name="Product">
-      <Column Name="idProduct" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FK_salesBook" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FK_salesBook" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="SalesBook_Product" Member="SalesBook" ThisKey="FK_salesBook" OtherKey="idSalesBook" Type="SalesBook" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Reactions" Member="Reactions">
     <Type Name="Reaction">
-      <Column Name="idReaction" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idReaction" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Reaction_SalesBook" Member="SalesBooks" ThisKey="idReaction" OtherKey="FK_reaction" Type="SalesBook" />
     </Type>
