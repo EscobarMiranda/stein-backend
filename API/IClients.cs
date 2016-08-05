@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 
 namespace API
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IClients" in both code and config file together.
     [ServiceContract]
     public interface IClients
     {
@@ -15,15 +15,27 @@ namespace API
         bool Create(Client client);
 
         [OperationContract]
-        Client get(int id);
+        [WebInvoke(
+            Method = "GET",
+            UriTemplate = "/{id}",
+            ResponseFormat = WebMessageFormat.Json
+            )]
+        Client Get(string id);
+        
+        [OperationContract]
+        [WebInvoke(
+            Method = "DELETE",
+            UriTemplate = "/{id}",
+            ResponseFormat = WebMessageFormat.Json
+            )]
+        bool Delete(string id);
 
         [OperationContract]
-        bool Update(Client client);
-
-        [OperationContract]
-        bool Delete(int id);
-
-        [OperationContract]
-        List<Client> getList();
+        [WebInvoke(
+            Method = "GET",
+            UriTemplate = "/all",
+            ResponseFormat = WebMessageFormat.Json
+            )]
+        List<Client> GetList();
     }
 }

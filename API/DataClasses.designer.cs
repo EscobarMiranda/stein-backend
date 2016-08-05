@@ -36,15 +36,6 @@ namespace API
     partial void InsertClientsType(ClientsType instance);
     partial void UpdateClientsType(ClientsType instance);
     partial void DeleteClientsType(ClientsType instance);
-    partial void InsertProduct(Product instance);
-    partial void UpdateProduct(Product instance);
-    partial void DeleteProduct(Product instance);
-    partial void InsertSeller(Seller instance);
-    partial void UpdateSeller(Seller instance);
-    partial void DeleteSeller(Seller instance);
-    partial void InsertVisit(Visit instance);
-    partial void UpdateVisit(Visit instance);
-    partial void DeleteVisit(Visit instance);
     #endregion
 		
 		public DataClassesDataContext() : 
@@ -92,30 +83,6 @@ namespace API
 				return this.GetTable<ClientsType>();
 			}
 		}
-		
-		public System.Data.Linq.Table<Product> Products
-		{
-			get
-			{
-				return this.GetTable<Product>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Seller> Sellers
-		{
-			get
-			{
-				return this.GetTable<Seller>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Visit> Visits
-		{
-			get
-			{
-				return this.GetTable<Visit>();
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Clients")]
@@ -130,33 +97,31 @@ namespace API
 		
 		private string _lastName;
 		
-		private string _country;
-		
-		private string _address1;
-		
-		private string _address2;
-		
-		private string _province;
-		
-		private string _zone;
-		
-		private string _latitude;
-		
-		private string _longitude;
-		
 		private string _email;
 		
 		private string _phone1;
 		
 		private string _phone2;
 		
-		private System.Data.Linq.Binary _timestamp;
+		private string _country;
 		
-		private byte _FK_clientType;
+		private string _province;
 		
-		private bool _status;
+		private string _address1;
 		
-		private EntitySet<Visit> _Visits;
+		private string _address2;
+		
+		private string _latitude;
+		
+		private string _longitude;
+		
+		private string _zone;
+		
+		private System.Nullable<bool> _status;
+		
+		private System.Nullable<System.DateTime> _timestamp;
+		
+		private byte _ClientsTypesidClientType;
 		
 		private EntityRef<ClientsType> _ClientsType;
 		
@@ -170,42 +135,41 @@ namespace API
     partial void OnnameChanged();
     partial void OnlastNameChanging(string value);
     partial void OnlastNameChanged();
-    partial void OncountryChanging(string value);
-    partial void OncountryChanged();
-    partial void Onaddress1Changing(string value);
-    partial void Onaddress1Changed();
-    partial void Onaddress2Changing(string value);
-    partial void Onaddress2Changed();
-    partial void OnprovinceChanging(string value);
-    partial void OnprovinceChanged();
-    partial void OnzoneChanging(string value);
-    partial void OnzoneChanged();
-    partial void OnlatitudeChanging(string value);
-    partial void OnlatitudeChanged();
-    partial void OnlongitudeChanging(string value);
-    partial void OnlongitudeChanged();
     partial void OnemailChanging(string value);
     partial void OnemailChanged();
     partial void Onphone1Changing(string value);
     partial void Onphone1Changed();
     partial void Onphone2Changing(string value);
     partial void Onphone2Changed();
-    partial void OntimestampChanging(System.Data.Linq.Binary value);
-    partial void OntimestampChanged();
-    partial void OnFK_clientTypeChanging(byte value);
-    partial void OnFK_clientTypeChanged();
-    partial void OnstatusChanging(bool value);
+    partial void OncountryChanging(string value);
+    partial void OncountryChanged();
+    partial void OnprovinceChanging(string value);
+    partial void OnprovinceChanged();
+    partial void Onaddress1Changing(string value);
+    partial void Onaddress1Changed();
+    partial void Onaddress2Changing(string value);
+    partial void Onaddress2Changed();
+    partial void OnlatitudeChanging(string value);
+    partial void OnlatitudeChanged();
+    partial void OnlongitudeChanging(string value);
+    partial void OnlongitudeChanged();
+    partial void OnzoneChanging(string value);
+    partial void OnzoneChanged();
+    partial void OnstatusChanging(System.Nullable<bool> value);
     partial void OnstatusChanged();
+    partial void OntimestampChanging(System.Nullable<System.DateTime> value);
+    partial void OntimestampChanged();
+    partial void OnClientsTypesidClientTypeChanging(byte value);
+    partial void OnClientsTypesidClientTypeChanged();
     #endregion
 		
 		public Client()
 		{
-			this._Visits = new EntitySet<Visit>(new Action<Visit>(this.attach_Visits), new Action<Visit>(this.detach_Visits));
 			this._ClientsType = default(EntityRef<ClientsType>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClient", DbType="Int NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClient", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idClient
 		{
 			get
@@ -225,7 +189,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50)")]
 		public string name
 		{
 			get
@@ -245,7 +209,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastName", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastName", DbType="VarChar(50)")]
 		public string lastName
 		{
 			get
@@ -265,147 +229,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string country
-		{
-			get
-			{
-				return this._country;
-			}
-			set
-			{
-				if ((this._country != value))
-				{
-					this.OncountryChanging(value);
-					this.SendPropertyChanging();
-					this._country = value;
-					this.SendPropertyChanged("country");
-					this.OncountryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address1", DbType="VarChar(400) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string address1
-		{
-			get
-			{
-				return this._address1;
-			}
-			set
-			{
-				if ((this._address1 != value))
-				{
-					this.Onaddress1Changing(value);
-					this.SendPropertyChanging();
-					this._address1 = value;
-					this.SendPropertyChanged("address1");
-					this.Onaddress1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address2", DbType="VarChar(400)", UpdateCheck=UpdateCheck.Never)]
-		public string address2
-		{
-			get
-			{
-				return this._address2;
-			}
-			set
-			{
-				if ((this._address2 != value))
-				{
-					this.Onaddress2Changing(value);
-					this.SendPropertyChanging();
-					this._address2 = value;
-					this.SendPropertyChanged("address2");
-					this.Onaddress2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_province", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string province
-		{
-			get
-			{
-				return this._province;
-			}
-			set
-			{
-				if ((this._province != value))
-				{
-					this.OnprovinceChanging(value);
-					this.SendPropertyChanging();
-					this._province = value;
-					this.SendPropertyChanged("province");
-					this.OnprovinceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_zone", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string zone
-		{
-			get
-			{
-				return this._zone;
-			}
-			set
-			{
-				if ((this._zone != value))
-				{
-					this.OnzoneChanging(value);
-					this.SendPropertyChanging();
-					this._zone = value;
-					this.SendPropertyChanged("zone");
-					this.OnzoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string latitude
-		{
-			get
-			{
-				return this._latitude;
-			}
-			set
-			{
-				if ((this._latitude != value))
-				{
-					this.OnlatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._latitude = value;
-					this.SendPropertyChanged("latitude");
-					this.OnlatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string longitude
-		{
-			get
-			{
-				return this._longitude;
-			}
-			set
-			{
-				if ((this._longitude != value))
-				{
-					this.OnlongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._longitude = value;
-					this.SendPropertyChanged("longitude");
-					this.OnlongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)")]
 		public string email
 		{
 			get
@@ -425,7 +249,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone1", DbType="VarChar(20) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone1", DbType="VarChar(20)")]
 		public string phone1
 		{
 			get
@@ -445,7 +269,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone2", DbType="VarChar(20) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone2", DbType="VarChar(20)")]
 		public string phone2
 		{
 			get
@@ -465,52 +289,148 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timestamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary timestamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="VarChar(30)")]
+		public string country
 		{
 			get
 			{
-				return this._timestamp;
+				return this._country;
 			}
 			set
 			{
-				if ((this._timestamp != value))
+				if ((this._country != value))
 				{
-					this.OntimestampChanging(value);
+					this.OncountryChanging(value);
 					this.SendPropertyChanging();
-					this._timestamp = value;
-					this.SendPropertyChanged("timestamp");
-					this.OntimestampChanged();
+					this._country = value;
+					this.SendPropertyChanged("country");
+					this.OncountryChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_clientType", DbType="TinyInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public byte FK_clientType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_province", DbType="VarChar(30)")]
+		public string province
 		{
 			get
 			{
-				return this._FK_clientType;
+				return this._province;
 			}
 			set
 			{
-				if ((this._FK_clientType != value))
+				if ((this._province != value))
 				{
-					if (this._ClientsType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_clientTypeChanging(value);
+					this.OnprovinceChanging(value);
 					this.SendPropertyChanging();
-					this._FK_clientType = value;
-					this.SendPropertyChanged("FK_clientType");
-					this.OnFK_clientTypeChanged();
+					this._province = value;
+					this.SendPropertyChanged("province");
+					this.OnprovinceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public bool status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address1", DbType="VarChar(400)")]
+		public string address1
+		{
+			get
+			{
+				return this._address1;
+			}
+			set
+			{
+				if ((this._address1 != value))
+				{
+					this.Onaddress1Changing(value);
+					this.SendPropertyChanging();
+					this._address1 = value;
+					this.SendPropertyChanged("address1");
+					this.Onaddress1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address2", DbType="VarChar(400)")]
+		public string address2
+		{
+			get
+			{
+				return this._address2;
+			}
+			set
+			{
+				if ((this._address2 != value))
+				{
+					this.Onaddress2Changing(value);
+					this.SendPropertyChanging();
+					this._address2 = value;
+					this.SendPropertyChanged("address2");
+					this.Onaddress2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="VarChar(50)")]
+		public string latitude
+		{
+			get
+			{
+				return this._latitude;
+			}
+			set
+			{
+				if ((this._latitude != value))
+				{
+					this.OnlatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._latitude = value;
+					this.SendPropertyChanged("latitude");
+					this.OnlatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="VarChar(50)")]
+		public string longitude
+		{
+			get
+			{
+				return this._longitude;
+			}
+			set
+			{
+				if ((this._longitude != value))
+				{
+					this.OnlongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_zone", DbType="VarChar(50)")]
+		public string zone
+		{
+			get
+			{
+				return this._zone;
+			}
+			set
+			{
+				if ((this._zone != value))
+				{
+					this.OnzoneChanging(value);
+					this.SendPropertyChanging();
+					this._zone = value;
+					this.SendPropertyChanged("zone");
+					this.OnzoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Bit")]
+		public System.Nullable<bool> status
 		{
 			get
 			{
@@ -529,20 +449,51 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Visit", Storage="_Visits", ThisKey="idClient", OtherKey="FK_client")]
-		public EntitySet<Visit> Visits
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timestamp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> timestamp
 		{
 			get
 			{
-				return this._Visits;
+				return this._timestamp;
 			}
 			set
 			{
-				this._Visits.Assign(value);
+				if ((this._timestamp != value))
+				{
+					this.OntimestampChanging(value);
+					this.SendPropertyChanging();
+					this._timestamp = value;
+					this.SendPropertyChanged("timestamp");
+					this.OntimestampChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ClientsType_Client", Storage="_ClientsType", ThisKey="FK_clientType", OtherKey="idClientType", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientsTypesidClientType", DbType="TinyInt NOT NULL")]
+		public byte ClientsTypesidClientType
+		{
+			get
+			{
+				return this._ClientsTypesidClientType;
+			}
+			set
+			{
+				if ((this._ClientsTypesidClientType != value))
+				{
+					if (this._ClientsType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnClientsTypesidClientTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ClientsTypesidClientType = value;
+					this.SendPropertyChanged("ClientsTypesidClientType");
+					this.OnClientsTypesidClientTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ClientsType_Client", Storage="_ClientsType", ThisKey="ClientsTypesidClientType", OtherKey="idClientType", IsForeignKey=true)]
 		public ClientsType ClientsType
 		{
 			get
@@ -565,11 +516,11 @@ namespace API
 					if ((value != null))
 					{
 						value.Clients.Add(this);
-						this._FK_clientType = value.idClientType;
+						this._ClientsTypesidClientType = value.idClientType;
 					}
 					else
 					{
-						this._FK_clientType = default(byte);
+						this._ClientsTypesidClientType = default(byte);
 					}
 					this.SendPropertyChanged("ClientsType");
 				}
@@ -594,18 +545,6 @@ namespace API
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Visits(Visit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = this;
-		}
-		
-		private void detach_Visits(Visit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Client = null;
 		}
 	}
 	
@@ -637,7 +576,7 @@ namespace API
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClientType", DbType="TinyInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idClientType", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public byte idClientType
 		{
 			get
@@ -657,7 +596,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
 		public string name
 		{
 			get
@@ -677,7 +616,7 @@ namespace API
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ClientsType_Client", Storage="_Clients", ThisKey="idClientType", OtherKey="FK_clientType")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ClientsType_Client", Storage="_Clients", ThisKey="idClientType", OtherKey="ClientsTypesidClientType")]
 		public EntitySet<Client> Clients
 		{
 			get
@@ -720,923 +659,6 @@ namespace API
 		{
 			this.SendPropertyChanging();
 			entity.ClientsType = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Products")]
-	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _idProduct;
-		
-		private string _name;
-		
-		private long _FK_visit;
-		
-		private EntityRef<Visit> _Visit;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidProductChanging(long value);
-    partial void OnidProductChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnFK_visitChanging(long value);
-    partial void OnFK_visitChanged();
-    #endregion
-		
-		public Product()
-		{
-			this._Visit = default(EntityRef<Visit>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProduct", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long idProduct
-		{
-			get
-			{
-				return this._idProduct;
-			}
-			set
-			{
-				if ((this._idProduct != value))
-				{
-					this.OnidProductChanging(value);
-					this.SendPropertyChanging();
-					this._idProduct = value;
-					this.SendPropertyChanged("idProduct");
-					this.OnidProductChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_visit", DbType="BigInt NOT NULL")]
-		public long FK_visit
-		{
-			get
-			{
-				return this._FK_visit;
-			}
-			set
-			{
-				if ((this._FK_visit != value))
-				{
-					if (this._Visit.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_visitChanging(value);
-					this.SendPropertyChanging();
-					this._FK_visit = value;
-					this.SendPropertyChanged("FK_visit");
-					this.OnFK_visitChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_Product", Storage="_Visit", ThisKey="FK_visit", OtherKey="idVisit", IsForeignKey=true)]
-		public Visit Visit
-		{
-			get
-			{
-				return this._Visit.Entity;
-			}
-			set
-			{
-				Visit previousValue = this._Visit.Entity;
-				if (((previousValue != value) 
-							|| (this._Visit.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Visit.Entity = null;
-						previousValue.Products.Remove(this);
-					}
-					this._Visit.Entity = value;
-					if ((value != null))
-					{
-						value.Products.Add(this);
-						this._FK_visit = value.idVisit;
-					}
-					else
-					{
-						this._FK_visit = default(long);
-					}
-					this.SendPropertyChanged("Visit");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sellers")]
-	public partial class Seller : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idSeller;
-		
-		private string _name;
-		
-		private string _lastName;
-		
-		private string _country;
-		
-		private string _address1;
-		
-		private string _address2;
-		
-		private string _province;
-		
-		private string _zone;
-		
-		private string _email;
-		
-		private string _phone1;
-		
-		private string _phone2;
-		
-		private string _username;
-		
-		private string _password;
-		
-		private System.Data.Linq.Binary _timestamp;
-		
-		private bool _status;
-		
-		private EntitySet<Visit> _Visits;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidSellerChanging(int value);
-    partial void OnidSellerChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnlastNameChanging(string value);
-    partial void OnlastNameChanged();
-    partial void OncountryChanging(string value);
-    partial void OncountryChanged();
-    partial void Onaddress1Changing(string value);
-    partial void Onaddress1Changed();
-    partial void Onaddress2Changing(string value);
-    partial void Onaddress2Changed();
-    partial void OnprovinceChanging(string value);
-    partial void OnprovinceChanged();
-    partial void OnzoneChanging(string value);
-    partial void OnzoneChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void Onphone1Changing(string value);
-    partial void Onphone1Changed();
-    partial void Onphone2Changing(string value);
-    partial void Onphone2Changed();
-    partial void OnusernameChanging(string value);
-    partial void OnusernameChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void OntimestampChanging(System.Data.Linq.Binary value);
-    partial void OntimestampChanged();
-    partial void OnstatusChanging(bool value);
-    partial void OnstatusChanged();
-    #endregion
-		
-		public Seller()
-		{
-			this._Visits = new EntitySet<Visit>(new Action<Visit>(this.attach_Visits), new Action<Visit>(this.detach_Visits));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idSeller", DbType="Int NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public int idSeller
-		{
-			get
-			{
-				return this._idSeller;
-			}
-			set
-			{
-				if ((this._idSeller != value))
-				{
-					this.OnidSellerChanging(value);
-					this.SendPropertyChanging();
-					this._idSeller = value;
-					this.SendPropertyChanged("idSeller");
-					this.OnidSellerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastName", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string lastName
-		{
-			get
-			{
-				return this._lastName;
-			}
-			set
-			{
-				if ((this._lastName != value))
-				{
-					this.OnlastNameChanging(value);
-					this.SendPropertyChanging();
-					this._lastName = value;
-					this.SendPropertyChanged("lastName");
-					this.OnlastNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string country
-		{
-			get
-			{
-				return this._country;
-			}
-			set
-			{
-				if ((this._country != value))
-				{
-					this.OncountryChanging(value);
-					this.SendPropertyChanging();
-					this._country = value;
-					this.SendPropertyChanged("country");
-					this.OncountryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address1", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string address1
-		{
-			get
-			{
-				return this._address1;
-			}
-			set
-			{
-				if ((this._address1 != value))
-				{
-					this.Onaddress1Changing(value);
-					this.SendPropertyChanging();
-					this._address1 = value;
-					this.SendPropertyChanged("address1");
-					this.Onaddress1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address2", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string address2
-		{
-			get
-			{
-				return this._address2;
-			}
-			set
-			{
-				if ((this._address2 != value))
-				{
-					this.Onaddress2Changing(value);
-					this.SendPropertyChanging();
-					this._address2 = value;
-					this.SendPropertyChanged("address2");
-					this.Onaddress2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_province", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string province
-		{
-			get
-			{
-				return this._province;
-			}
-			set
-			{
-				if ((this._province != value))
-				{
-					this.OnprovinceChanging(value);
-					this.SendPropertyChanging();
-					this._province = value;
-					this.SendPropertyChanged("province");
-					this.OnprovinceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_zone", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string zone
-		{
-			get
-			{
-				return this._zone;
-			}
-			set
-			{
-				if ((this._zone != value))
-				{
-					this.OnzoneChanging(value);
-					this.SendPropertyChanging();
-					this._zone = value;
-					this.SendPropertyChanged("zone");
-					this.OnzoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone1", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string phone1
-		{
-			get
-			{
-				return this._phone1;
-			}
-			set
-			{
-				if ((this._phone1 != value))
-				{
-					this.Onphone1Changing(value);
-					this.SendPropertyChanging();
-					this._phone1 = value;
-					this.SendPropertyChanged("phone1");
-					this.Onphone1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone2", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string phone2
-		{
-			get
-			{
-				return this._phone2;
-			}
-			set
-			{
-				if ((this._phone2 != value))
-				{
-					this.Onphone2Changing(value);
-					this.SendPropertyChanging();
-					this._phone2 = value;
-					this.SendPropertyChanged("phone2");
-					this.Onphone2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string username
-		{
-			get
-			{
-				return this._username;
-			}
-			set
-			{
-				if ((this._username != value))
-				{
-					this.OnusernameChanging(value);
-					this.SendPropertyChanging();
-					this._username = value;
-					this.SendPropertyChanged("username");
-					this.OnusernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timestamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary timestamp
-		{
-			get
-			{
-				return this._timestamp;
-			}
-			set
-			{
-				if ((this._timestamp != value))
-				{
-					this.OntimestampChanging(value);
-					this.SendPropertyChanging();
-					this._timestamp = value;
-					this.SendPropertyChanged("timestamp");
-					this.OntimestampChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Bit NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public bool status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seller_Visit", Storage="_Visits", ThisKey="idSeller", OtherKey="FK_seller")]
-		public EntitySet<Visit> Visits
-		{
-			get
-			{
-				return this._Visits;
-			}
-			set
-			{
-				this._Visits.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Visits(Visit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Seller = this;
-		}
-		
-		private void detach_Visits(Visit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Seller = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Visits")]
-	public partial class Visit : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _idVisit;
-		
-		private byte _reaction;
-		
-		private string _comment;
-		
-		private string _latitude;
-		
-		private string _longitude;
-		
-		private System.Data.Linq.Binary _timestamp;
-		
-		private int _FK_seller;
-		
-		private int _FK_client;
-		
-		private EntitySet<Product> _Products;
-		
-		private EntityRef<Client> _Client;
-		
-		private EntityRef<Seller> _Seller;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidVisitChanging(long value);
-    partial void OnidVisitChanged();
-    partial void OnreactionChanging(byte value);
-    partial void OnreactionChanged();
-    partial void OncommentChanging(string value);
-    partial void OncommentChanged();
-    partial void OnlatitudeChanging(string value);
-    partial void OnlatitudeChanged();
-    partial void OnlongitudeChanging(string value);
-    partial void OnlongitudeChanged();
-    partial void OntimestampChanging(System.Data.Linq.Binary value);
-    partial void OntimestampChanged();
-    partial void OnFK_sellerChanging(int value);
-    partial void OnFK_sellerChanged();
-    partial void OnFK_clientChanging(int value);
-    partial void OnFK_clientChanged();
-    #endregion
-		
-		public Visit()
-		{
-			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
-			this._Client = default(EntityRef<Client>);
-			this._Seller = default(EntityRef<Seller>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idVisit", DbType="BigInt NOT NULL", IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public long idVisit
-		{
-			get
-			{
-				return this._idVisit;
-			}
-			set
-			{
-				if ((this._idVisit != value))
-				{
-					this.OnidVisitChanging(value);
-					this.SendPropertyChanging();
-					this._idVisit = value;
-					this.SendPropertyChanged("idVisit");
-					this.OnidVisitChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_reaction", DbType="TinyInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public byte reaction
-		{
-			get
-			{
-				return this._reaction;
-			}
-			set
-			{
-				if ((this._reaction != value))
-				{
-					this.OnreactionChanging(value);
-					this.SendPropertyChanging();
-					this._reaction = value;
-					this.SendPropertyChanged("reaction");
-					this.OnreactionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comment", DbType="VarChar(300) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string comment
-		{
-			get
-			{
-				return this._comment;
-			}
-			set
-			{
-				if ((this._comment != value))
-				{
-					this.OncommentChanging(value);
-					this.SendPropertyChanging();
-					this._comment = value;
-					this.SendPropertyChanged("comment");
-					this.OncommentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string latitude
-		{
-			get
-			{
-				return this._latitude;
-			}
-			set
-			{
-				if ((this._latitude != value))
-				{
-					this.OnlatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._latitude = value;
-					this.SendPropertyChanged("latitude");
-					this.OnlatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string longitude
-		{
-			get
-			{
-				return this._longitude;
-			}
-			set
-			{
-				if ((this._longitude != value))
-				{
-					this.OnlongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._longitude = value;
-					this.SendPropertyChanged("longitude");
-					this.OnlongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timestamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary timestamp
-		{
-			get
-			{
-				return this._timestamp;
-			}
-			set
-			{
-				if ((this._timestamp != value))
-				{
-					this.OntimestampChanging(value);
-					this.SendPropertyChanging();
-					this._timestamp = value;
-					this.SendPropertyChanged("timestamp");
-					this.OntimestampChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_seller", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int FK_seller
-		{
-			get
-			{
-				return this._FK_seller;
-			}
-			set
-			{
-				if ((this._FK_seller != value))
-				{
-					if (this._Seller.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_sellerChanging(value);
-					this.SendPropertyChanging();
-					this._FK_seller = value;
-					this.SendPropertyChanged("FK_seller");
-					this.OnFK_sellerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_client", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
-		public int FK_client
-		{
-			get
-			{
-				return this._FK_client;
-			}
-			set
-			{
-				if ((this._FK_client != value))
-				{
-					if (this._Client.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_clientChanging(value);
-					this.SendPropertyChanging();
-					this._FK_client = value;
-					this.SendPropertyChanged("FK_client");
-					this.OnFK_clientChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_Product", Storage="_Products", ThisKey="idVisit", OtherKey="FK_visit")]
-		public EntitySet<Product> Products
-		{
-			get
-			{
-				return this._Products;
-			}
-			set
-			{
-				this._Products.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Visit", Storage="_Client", ThisKey="FK_client", OtherKey="idClient", IsForeignKey=true)]
-		public Client Client
-		{
-			get
-			{
-				return this._Client.Entity;
-			}
-			set
-			{
-				Client previousValue = this._Client.Entity;
-				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Client.Entity = null;
-						previousValue.Visits.Remove(this);
-					}
-					this._Client.Entity = value;
-					if ((value != null))
-					{
-						value.Visits.Add(this);
-						this._FK_client = value.idClient;
-					}
-					else
-					{
-						this._FK_client = default(int);
-					}
-					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seller_Visit", Storage="_Seller", ThisKey="FK_seller", OtherKey="idSeller", IsForeignKey=true)]
-		public Seller Seller
-		{
-			get
-			{
-				return this._Seller.Entity;
-			}
-			set
-			{
-				Seller previousValue = this._Seller.Entity;
-				if (((previousValue != value) 
-							|| (this._Seller.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Seller.Entity = null;
-						previousValue.Visits.Remove(this);
-					}
-					this._Seller.Entity = value;
-					if ((value != null))
-					{
-						value.Visits.Add(this);
-						this._FK_seller = value.idSeller;
-					}
-					else
-					{
-						this._FK_seller = default(int);
-					}
-					this.SendPropertyChanged("Seller");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Products(Product entity)
-		{
-			this.SendPropertyChanging();
-			entity.Visit = this;
-		}
-		
-		private void detach_Products(Product entity)
-		{
-			this.SendPropertyChanging();
-			entity.Visit = null;
 		}
 	}
 }
