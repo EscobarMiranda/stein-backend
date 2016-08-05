@@ -19,12 +19,11 @@ namespace sfe.bll
                 return (from clients in db.Clients
                         where clients.active == true
                         select clients).ToList();
-                throw new ClientListNotFoundException("Client list not found");
             }
-            catch(ClientListNotFoundException e)
+            catch(Exception e)
             {
                 EventLog.WriteEntry(e.Source,e.Message);
-                return null;
+                throw new ClientListNotFoundException("Client list not found");
             }
         }
 
