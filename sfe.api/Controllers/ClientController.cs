@@ -31,7 +31,6 @@ namespace sfe.api.Controllers
         // PUT api/<controller>/5
         public void Put(Client client)
         {
-            bll.ClientLogic.Put(client);
         }
 
         // DELETE api/<controller>/5
