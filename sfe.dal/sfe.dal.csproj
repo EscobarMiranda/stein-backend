@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="DataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
