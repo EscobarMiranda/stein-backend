@@ -46,8 +46,6 @@
     <Compile Include="Exceptions\ClientNotFoundException.cs" />
     <Compile Include="Exceptions\PostClientException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Exceptions\Reaction\ReactionListNotFoundException.cs" />
-    <Compile Include="ReactionLogin.cs" />
     <Compile Include="VisitsLogic.cs" />
   </ItemGroup>
   <ItemGroup>
