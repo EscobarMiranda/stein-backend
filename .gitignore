@@ -244,3 +244,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+.vs/API/v14/.suo
+
