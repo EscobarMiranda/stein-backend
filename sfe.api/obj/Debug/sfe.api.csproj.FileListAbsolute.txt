@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\bin\ApplicationInsights.config
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\bin\roslyn\csc.exe
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -61,3 +62,6 @@ C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\bin\Antlr3.Runtime.pdb
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\obj\Debug\sfe.api.csprojResolveAssemblyReference.cache
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\obj\Debug\sfe.api.dll
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\obj\Debug\sfe.api.pdb
+=======
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.api\obj\Debug\sfe.api.csprojResolveAssemblyReference.cache
+>>>>>>> ac21c9910f90c9dc2508d3d2fe39fd3bf8e7790d
