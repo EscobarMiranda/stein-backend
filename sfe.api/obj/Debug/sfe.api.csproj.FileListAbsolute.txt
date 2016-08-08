@@ -61,4 +61,3 @@ C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\bin\Antlr3.Runtime.pdb
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\obj\Debug\sfe.api.csprojResolveAssemblyReference.cache
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\obj\Debug\sfe.api.dll
 C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.api\obj\Debug\sfe.api.pdb
-C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.api\obj\Debug\sfe.api.csprojResolveAssemblyReference.cache
