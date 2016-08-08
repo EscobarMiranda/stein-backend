@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="UnitTestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestReaction.cs" />
     <Compile Include="UnitTestVisits.cs" />
   </ItemGroup>
   <ItemGroup>
