@@ -13,16 +13,17 @@ namespace sfe.bll
     public class ClientLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Client> Get() {
+        public static List<Client> Get()
+        {
             try
             {
                 return (from clients in db.Clients
                         where clients.active == true
                         select clients).ToList();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source,e.Message);
+                EventLog.WriteEntry(e.Source, e.Message);
                 throw new ClientListNotFoundException("Client list not found");
             }
         }
@@ -35,9 +36,10 @@ namespace sfe.bll
                         where client.idClient == id
                         select client).Single();
             }
-            catch
+            catch (Exception e)
             {
-                return null;
+                EventLog.WriteEntry(e.Source, e.Message);
+                throw new ClientNotFoundException("Client not found");
             }
         }
 
@@ -48,9 +50,10 @@ namespace sfe.bll
                 db.Clients.InsertOnSubmit(client);
                 db.SubmitChanges();
             }
-            catch
+            catch (Exception e)
             {
-                throw new Exception(); // TODO: custom exception
+                EventLog.WriteEntry(e.Source, e.Message);
+                throw new PostClienException("Error creating client");
             }
         }
     }
