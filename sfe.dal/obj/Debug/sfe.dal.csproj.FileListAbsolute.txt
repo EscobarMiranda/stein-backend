@@ -1,0 +1,6 @@
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\bin\Debug\sfe.dal.dll.config
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\bin\Debug\sfe.dal.dll
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\bin\Debug\sfe.dal.pdb
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\obj\Debug\sfe.dal.csprojResolveAssemblyReference.cache
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\obj\Debug\sfe.dal.dll
+C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\obj\Debug\sfe.dal.pdb
