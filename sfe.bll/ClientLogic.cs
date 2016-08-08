@@ -1,7 +1,9 @@
 ﻿
+using sfe.bll.Exceptions;
 using sfe.dal;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace sfe.bll
 {
     public class ClientLogic
     {
-        private static DataClassesDataContext db = new DataClassesDataContext();
+        private static DataClassesDataContext db = Database.Instance;
         public static List<Client> Get() {
             try
             {
@@ -18,9 +20,10 @@ namespace sfe.bll
                         where clients.active == true
                         select clients).ToList();
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                EventLog.WriteEntry(e.Source,e.Message);
+                throw new ClientListNotFoundException("Client list not found");
             }
         }
 
