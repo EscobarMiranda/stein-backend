@@ -5,3 +5,10 @@ C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.bll\bin\Debug\sfe
 C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.bll\obj\Debug\sfe.bll.csprojResolveAssemblyReference.cache
 C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.bll\obj\Debug\sfe.bll.dll
 C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.bll\obj\Debug\sfe.bll.pdb
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\bin\Debug\sfe.bll.dll
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\bin\Debug\sfe.bll.pdb
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\bin\Debug\sfe.dal.dll
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\bin\Debug\sfe.dal.pdb
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\obj\Debug\sfe.bll.csprojResolveAssemblyReference.cache
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\obj\Debug\sfe.bll.dll
+C:\Users\luis\Desktop\Pernix\Stein\SFE_api\sfe.bll\obj\Debug\sfe.bll.pdb
