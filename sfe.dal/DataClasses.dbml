@@ -18,12 +18,12 @@
       <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Agent_SalesBook" Member="SalesBooks" ThisKey="idAgent" OtherKey="FK_agent" Type="SalesBook" />
+      <Association Name="Agent_Visit" Member="Visits" ThisKey="idAgent" OtherKey="FK_agent" Type="Visit" />
     </Type>
   </Table>
-  <Table Name="dbo.SalesBook" Member="SalesBooks">
-    <Type Name="SalesBook">
-      <Column Name="idSalesBook" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+  <Table Name="dbo.Visits" Member="Visits">
+    <Type Name="Visit">
+      <Column Name="idVisit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FK_agent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FK_reaction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -31,10 +31,10 @@
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
       <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Association Name="SalesBook_Product" Member="Products" ThisKey="idSalesBook" OtherKey="FK_salesBook" Type="Product" />
-      <Association Name="Agent_SalesBook" Member="Agent" ThisKey="FK_agent" OtherKey="idAgent" Type="Agent" IsForeignKey="true" />
-      <Association Name="Client_SalesBook" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
-      <Association Name="Reaction_SalesBook" Member="Reaction" ThisKey="FK_reaction" OtherKey="idReaction" Type="Reaction" IsForeignKey="true" />
+      <Association Name="Visit_Product" Member="Products" ThisKey="idVisit" OtherKey="FK_salesBook" Type="Product" />
+      <Association Name="Agent_Visit" Member="Agent" ThisKey="FK_agent" OtherKey="idAgent" Type="Agent" IsForeignKey="true" />
+      <Association Name="Client_Visit" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
+      <Association Name="Reaction_Visit" Member="Reaction" ThisKey="FK_reaction" OtherKey="idReaction" Type="Reaction" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Clients" Member="Clients">
@@ -58,7 +58,7 @@
       <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="FK_clientType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Client_SalesBook" Member="SalesBooks" ThisKey="idClient" OtherKey="FK_client" Type="SalesBook" />
+      <Association Name="Client_Visit" Member="Visits" ThisKey="idClient" OtherKey="FK_client" Type="Visit" />
       <Association Name="ClientType_Client" Member="ClientType" ThisKey="FK_clientType" OtherKey="idClientType" Type="ClientType" IsForeignKey="true" />
     </Type>
   </Table>
@@ -75,14 +75,14 @@
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FK_salesBook" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="SalesBook_Product" Member="SalesBook" ThisKey="FK_salesBook" OtherKey="idSalesBook" Type="SalesBook" IsForeignKey="true" />
+      <Association Name="Visit_Product" Member="Visit" ThisKey="FK_salesBook" OtherKey="idVisit" Type="Visit" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Reactions" Member="Reactions">
     <Type Name="Reaction">
       <Column Name="idReaction" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Reaction_SalesBook" Member="SalesBooks" ThisKey="idReaction" OtherKey="FK_reaction" Type="SalesBook" />
+      <Association Name="Reaction_Visit" Member="Visits" ThisKey="idReaction" OtherKey="FK_reaction" Type="Visit" />
     </Type>
   </Table>
 </Database>

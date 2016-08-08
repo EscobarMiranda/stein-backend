@@ -33,9 +33,9 @@ namespace sfe.dal
     partial void InsertAgent(Agent instance);
     partial void UpdateAgent(Agent instance);
     partial void DeleteAgent(Agent instance);
-    partial void InsertSalesBook(SalesBook instance);
-    partial void UpdateSalesBook(SalesBook instance);
-    partial void DeleteSalesBook(SalesBook instance);
+    partial void InsertVisit(Visit instance);
+    partial void UpdateVisit(Visit instance);
+    partial void DeleteVisit(Visit instance);
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
@@ -88,11 +88,11 @@ namespace sfe.dal
 			}
 		}
 		
-		public System.Data.Linq.Table<SalesBook> SalesBooks
+		public System.Data.Linq.Table<Visit> Visits
 		{
 			get
 			{
-				return this.GetTable<SalesBook>();
+				return this.GetTable<Visit>();
 			}
 		}
 		
@@ -167,7 +167,7 @@ namespace sfe.dal
 		
 		private bool _active;
 		
-		private EntitySet<SalesBook> _SalesBooks;
+		private EntitySet<Visit> _Visits;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -209,7 +209,7 @@ namespace sfe.dal
 		
 		public Agent()
 		{
-			this._SalesBooks = new EntitySet<SalesBook>(new Action<SalesBook>(this.attach_SalesBooks), new Action<SalesBook>(this.detach_SalesBooks));
+			this._Visits = new EntitySet<Visit>(new Action<Visit>(this.attach_Visits), new Action<Visit>(this.detach_Visits));
 			OnCreated();
 		}
 		
@@ -533,16 +533,16 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_SalesBook", Storage="_SalesBooks", ThisKey="idAgent", OtherKey="FK_agent")]
-		public EntitySet<SalesBook> SalesBooks
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_Visit", Storage="_Visits", ThisKey="idAgent", OtherKey="FK_agent")]
+		public EntitySet<Visit> Visits
 		{
 			get
 			{
-				return this._SalesBooks;
+				return this._Visits;
 			}
 			set
 			{
-				this._SalesBooks.Assign(value);
+				this._Visits.Assign(value);
 			}
 		}
 		
@@ -566,26 +566,26 @@ namespace sfe.dal
 			}
 		}
 		
-		private void attach_SalesBooks(SalesBook entity)
+		private void attach_Visits(Visit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Agent = this;
 		}
 		
-		private void detach_SalesBooks(SalesBook entity)
+		private void detach_Visits(Visit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Agent = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SalesBook")]
-	public partial class SalesBook : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Visits")]
+	public partial class Visit : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _idSalesBook;
+		private int _idVisit;
 		
 		private int _FK_agent;
 		
@@ -613,8 +613,8 @@ namespace sfe.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidSalesBookChanging(int value);
-    partial void OnidSalesBookChanged();
+    partial void OnidVisitChanging(int value);
+    partial void OnidVisitChanged();
     partial void OnFK_agentChanging(int value);
     partial void OnFK_agentChanged();
     partial void OnFK_clientChanging(int value);
@@ -631,7 +631,7 @@ namespace sfe.dal
     partial void OnlongitudeChanged();
     #endregion
 		
-		public SalesBook()
+		public Visit()
 		{
 			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
 			this._Agent = default(EntityRef<Agent>);
@@ -640,22 +640,22 @@ namespace sfe.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idSalesBook", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idSalesBook
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idVisit", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idVisit
 		{
 			get
 			{
-				return this._idSalesBook;
+				return this._idVisit;
 			}
 			set
 			{
-				if ((this._idSalesBook != value))
+				if ((this._idVisit != value))
 				{
-					this.OnidSalesBookChanging(value);
+					this.OnidVisitChanging(value);
 					this.SendPropertyChanging();
-					this._idSalesBook = value;
-					this.SendPropertyChanged("idSalesBook");
-					this.OnidSalesBookChanged();
+					this._idVisit = value;
+					this.SendPropertyChanged("idVisit");
+					this.OnidVisitChanged();
 				}
 			}
 		}
@@ -812,7 +812,7 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SalesBook_Product", Storage="_Products", ThisKey="idSalesBook", OtherKey="FK_salesBook")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_Product", Storage="_Products", ThisKey="idVisit", OtherKey="FK_salesBook")]
 		public EntitySet<Product> Products
 		{
 			get
@@ -825,7 +825,7 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_SalesBook", Storage="_Agent", ThisKey="FK_agent", OtherKey="idAgent", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Agent_Visit", Storage="_Agent", ThisKey="FK_agent", OtherKey="idAgent", IsForeignKey=true)]
 		public Agent Agent
 		{
 			get
@@ -842,12 +842,12 @@ namespace sfe.dal
 					if ((previousValue != null))
 					{
 						this._Agent.Entity = null;
-						previousValue.SalesBooks.Remove(this);
+						previousValue.Visits.Remove(this);
 					}
 					this._Agent.Entity = value;
 					if ((value != null))
 					{
-						value.SalesBooks.Add(this);
+						value.Visits.Add(this);
 						this._FK_agent = value.idAgent;
 					}
 					else
@@ -859,7 +859,7 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_SalesBook", Storage="_Client", ThisKey="FK_client", OtherKey="idClient", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Visit", Storage="_Client", ThisKey="FK_client", OtherKey="idClient", IsForeignKey=true)]
 		public Client Client
 		{
 			get
@@ -876,12 +876,12 @@ namespace sfe.dal
 					if ((previousValue != null))
 					{
 						this._Client.Entity = null;
-						previousValue.SalesBooks.Remove(this);
+						previousValue.Visits.Remove(this);
 					}
 					this._Client.Entity = value;
 					if ((value != null))
 					{
-						value.SalesBooks.Add(this);
+						value.Visits.Add(this);
 						this._FK_client = value.idClient;
 					}
 					else
@@ -893,7 +893,7 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reaction_SalesBook", Storage="_Reaction", ThisKey="FK_reaction", OtherKey="idReaction", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reaction_Visit", Storage="_Reaction", ThisKey="FK_reaction", OtherKey="idReaction", IsForeignKey=true)]
 		public Reaction Reaction
 		{
 			get
@@ -910,12 +910,12 @@ namespace sfe.dal
 					if ((previousValue != null))
 					{
 						this._Reaction.Entity = null;
-						previousValue.SalesBooks.Remove(this);
+						previousValue.Visits.Remove(this);
 					}
 					this._Reaction.Entity = value;
 					if ((value != null))
 					{
-						value.SalesBooks.Add(this);
+						value.Visits.Add(this);
 						this._FK_reaction = value.idReaction;
 					}
 					else
@@ -950,13 +950,13 @@ namespace sfe.dal
 		private void attach_Products(Product entity)
 		{
 			this.SendPropertyChanging();
-			entity.SalesBook = this;
+			entity.Visit = this;
 		}
 		
 		private void detach_Products(Product entity)
 		{
 			this.SendPropertyChanging();
-			entity.SalesBook = null;
+			entity.Visit = null;
 		}
 	}
 	
@@ -1004,7 +1004,7 @@ namespace sfe.dal
 		
 		private int _FK_clientType;
 		
-		private EntitySet<SalesBook> _SalesBooks;
+		private EntitySet<Visit> _Visits;
 		
 		private EntityRef<ClientType> _ClientType;
 		
@@ -1054,7 +1054,7 @@ namespace sfe.dal
 		
 		public Client()
 		{
-			this._SalesBooks = new EntitySet<SalesBook>(new Action<SalesBook>(this.attach_SalesBooks), new Action<SalesBook>(this.detach_SalesBooks));
+			this._Visits = new EntitySet<Visit>(new Action<Visit>(this.attach_Visits), new Action<Visit>(this.detach_Visits));
 			this._ClientType = default(EntityRef<ClientType>);
 			OnCreated();
 		}
@@ -1443,16 +1443,16 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_SalesBook", Storage="_SalesBooks", ThisKey="idClient", OtherKey="FK_client")]
-		public EntitySet<SalesBook> SalesBooks
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Visit", Storage="_Visits", ThisKey="idClient", OtherKey="FK_client")]
+		public EntitySet<Visit> Visits
 		{
 			get
 			{
-				return this._SalesBooks;
+				return this._Visits;
 			}
 			set
 			{
-				this._SalesBooks.Assign(value);
+				this._Visits.Assign(value);
 			}
 		}
 		
@@ -1510,13 +1510,13 @@ namespace sfe.dal
 			}
 		}
 		
-		private void attach_SalesBooks(SalesBook entity)
+		private void attach_Visits(Visit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = this;
 		}
 		
-		private void detach_SalesBooks(SalesBook entity)
+		private void detach_Visits(Visit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Client = null;
@@ -1651,7 +1651,7 @@ namespace sfe.dal
 		
 		private bool _active;
 		
-		private EntityRef<SalesBook> _SalesBook;
+		private EntityRef<Visit> _Visit;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1669,7 +1669,7 @@ namespace sfe.dal
 		
 		public Product()
 		{
-			this._SalesBook = default(EntityRef<SalesBook>);
+			this._Visit = default(EntityRef<Visit>);
 			OnCreated();
 		}
 		
@@ -1724,7 +1724,7 @@ namespace sfe.dal
 			{
 				if ((this._FK_salesBook != value))
 				{
-					if (this._SalesBook.HasLoadedOrAssignedValue)
+					if (this._Visit.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1757,36 +1757,36 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SalesBook_Product", Storage="_SalesBook", ThisKey="FK_salesBook", OtherKey="idSalesBook", IsForeignKey=true)]
-		public SalesBook SalesBook
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_Product", Storage="_Visit", ThisKey="FK_salesBook", OtherKey="idVisit", IsForeignKey=true)]
+		public Visit Visit
 		{
 			get
 			{
-				return this._SalesBook.Entity;
+				return this._Visit.Entity;
 			}
 			set
 			{
-				SalesBook previousValue = this._SalesBook.Entity;
+				Visit previousValue = this._Visit.Entity;
 				if (((previousValue != value) 
-							|| (this._SalesBook.HasLoadedOrAssignedValue == false)))
+							|| (this._Visit.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._SalesBook.Entity = null;
+						this._Visit.Entity = null;
 						previousValue.Products.Remove(this);
 					}
-					this._SalesBook.Entity = value;
+					this._Visit.Entity = value;
 					if ((value != null))
 					{
 						value.Products.Add(this);
-						this._FK_salesBook = value.idSalesBook;
+						this._FK_salesBook = value.idVisit;
 					}
 					else
 					{
 						this._FK_salesBook = default(int);
 					}
-					this.SendPropertyChanged("SalesBook");
+					this.SendPropertyChanged("Visit");
 				}
 			}
 		}
@@ -1822,7 +1822,7 @@ namespace sfe.dal
 		
 		private string _description;
 		
-		private EntitySet<SalesBook> _SalesBooks;
+		private EntitySet<Visit> _Visits;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1836,7 +1836,7 @@ namespace sfe.dal
 		
 		public Reaction()
 		{
-			this._SalesBooks = new EntitySet<SalesBook>(new Action<SalesBook>(this.attach_SalesBooks), new Action<SalesBook>(this.detach_SalesBooks));
+			this._Visits = new EntitySet<Visit>(new Action<Visit>(this.attach_Visits), new Action<Visit>(this.detach_Visits));
 			OnCreated();
 		}
 		
@@ -1880,16 +1880,16 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reaction_SalesBook", Storage="_SalesBooks", ThisKey="idReaction", OtherKey="FK_reaction")]
-		public EntitySet<SalesBook> SalesBooks
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reaction_Visit", Storage="_Visits", ThisKey="idReaction", OtherKey="FK_reaction")]
+		public EntitySet<Visit> Visits
 		{
 			get
 			{
-				return this._SalesBooks;
+				return this._Visits;
 			}
 			set
 			{
-				this._SalesBooks.Assign(value);
+				this._Visits.Assign(value);
 			}
 		}
 		
@@ -1913,13 +1913,13 @@ namespace sfe.dal
 			}
 		}
 		
-		private void attach_SalesBooks(SalesBook entity)
+		private void attach_Visits(Visit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Reaction = this;
 		}
 		
-		private void detach_SalesBooks(SalesBook entity)
+		private void detach_Visits(Visit entity)
 		{
 			this.SendPropertyChanging();
 			entity.Reaction = null;
