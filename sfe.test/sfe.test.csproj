@@ -52,11 +52,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="UnitTestProduct.cs" />
     <Compile Include="UnitTestAgent.cs" />
     <Compile Include="UnitTestReaction.cs" />
     <Compile Include="UnitTestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTestVisits.cs" />
+    <Compile Include="UnitTestVisit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sfe.bll\sfe.bll.csproj">

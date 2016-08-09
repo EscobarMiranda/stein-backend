@@ -5,7 +5,7 @@ using sfe.dal;
 namespace sfe.test
 {
     [TestClass]
-    public class UnitTestVisits
+    public class UnitTestVisit
     {
         [TestMethod]
         public void TestMethodPostVisit()
