@@ -32,5 +32,11 @@ namespace sfe.test
         {
             Assert.IsNotNull(bll.ClientLogic.Get(1));
         }
+
+        [TestMethod]
+        public void TestMethodDeleteClient()
+        {
+            bll.ClientLogic.Delete(3);
+        }
     }
 }

@@ -36,6 +36,7 @@ namespace sfe.api.Controllers
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
+            bll.ClientLogic.Delete(id);
         }
     }
 }
