@@ -16,19 +16,19 @@ namespace sfe.test
             visit.FK_agent = 1;
             visit.FK_client = 1;
             visit.FK_reaction = 1;
-            bll.VisitsLogic.Post(visit);
+            bll.VisitLogic.Post(visit);
         }
 
         [TestMethod]
         public void TestMethodGetVisitList()
         {
-            Assert.IsTrue(bll.VisitsLogic.Get().Count > 0);
+            Assert.IsTrue(bll.VisitLogic.Get().Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetVisit()
         {
-            Assert.IsNotNull(bll.VisitsLogic.Get(1));
+            Assert.IsNotNull(bll.VisitLogic.Get(1));
         }
     }
 }

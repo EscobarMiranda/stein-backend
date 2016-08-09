@@ -1,5 +1,4 @@
-﻿using sfe.bll.Exceptions;
-using sfe.dal;
+﻿using sfe.dal;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,50 +8,50 @@ using System.Threading.Tasks;
 
 namespace sfe.bll
 {
-    public class AgentLogic
+    class ProductLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Agent> Get()
+        public static List<Product> Get()
         {
             try
             {
-                return (from agents in db.Agents
-                        where agents.active == true
-                        select agents).ToList();
+                return (from products in db.Products
+                        where products.active == true
+                        select products).ToList();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new AgentListNotFoundException("Agent list not found");
+                throw new ProductListNotFoundException("Product list not found");
             }
         }
 
-        public static Agent Get(int id)
+        public static Product Get(int id)
         {
             try
             {
-                return (from agent in db.Agents
-                        where agent.idAgent == id
-                        select agent).Single();
+                return (from product in db.Products
+                        where product.idProduct == id
+                        select product).Single();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new AgentNotFoundException("Agent not found");
+                throw new ProductNotFoundException("Product not found");
             }
         }
 
-        public static void Post(Agent agent)
+        public static void Post(Product product)
         {
             try
             {
-                db.Agents.InsertOnSubmit(agent);
+                db.Products.InsertOnSubmit(product);
                 db.SubmitChanges();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new PostAgentException("Error creating agent");
+                throw new PostProductException("Error creating product");
             }
         }
     }

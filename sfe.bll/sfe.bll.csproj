@@ -41,12 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\AgentListNotFoundException.cs" />
+    <Compile Include="AgentLogic.cs" />
+    <Compile Include="Exceptions\AgentNotFoundException.cs" />
     <Compile Include="ClientLogic.cs" />
     <Compile Include="Exceptions\ClientListNotFoundException.cs" />
     <Compile Include="Exceptions\ClientNotFoundException.cs" />
     <Compile Include="Exceptions\PostClientException.cs" />
+    <Compile Include="Exceptions\PostVisitException.cs" />
+    <Compile Include="Exceptions\PostAgentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisitsLogic.cs" />
+    <Compile Include="Exceptions\VisitListNotFoundException.cs" />
+    <Compile Include="Exceptions\VisitNotFoundException.cs" />
+    <Compile Include="Exceptions\ReactionListNotFoundException.cs" />
+    <Compile Include="ReactionLogic.cs" />
+    <Compile Include="VisitLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sfe.dal\sfe.dal.csproj">

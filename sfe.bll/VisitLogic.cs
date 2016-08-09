@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sfe.bll
 {
-    public class VisitsLogic
+    public class VisitLogic
     {
         private static DataClassesDataContext db = Database.Instance;
         public static List<Visit> Get()
@@ -22,7 +22,7 @@ namespace sfe.bll
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new Exception(); // TODO: custom exception
+                throw new VisitListNotFoundException("Visit list not founed");
             }
         }
 
@@ -37,7 +37,7 @@ namespace sfe.bll
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new Exception(); // TODO: custom exception
+                throw new VisitNotFoundException("Visit not found");
             }
         }
 
@@ -51,7 +51,7 @@ namespace sfe.bll
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new Exception(); // TODO: custom exception
+                throw new PostVisitException("Error creating visit");
             }
         }
     }

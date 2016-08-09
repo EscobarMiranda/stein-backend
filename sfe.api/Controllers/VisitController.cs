@@ -8,24 +8,24 @@ using System.Web.Http;
 
 namespace sfe.api.Controllers
 {
-    public class AgentController : ApiController
+    public class VisitController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<Agent> Get()
+        public IEnumerable<Visit> Get()
         {
-            return bll.AgentLogic.Get();
+            return bll.VisitLogic.Get();
         }
 
         // GET api/<controller>/5
-        public Agent Get(int id)
+        public Visit Get(int id)
         {
-            return bll.AgentLogic.Get(id);
+            return bll.VisitLogic.Get(id);
         }
 
         // POST api/<controller>
-        public void Post(Agent client)
+        public void Post(Visit visit)
         {
-            bll.AgentLogic.Post(client);
+            bll.VisitLogic.Post(visit);
         }
     }
 }
