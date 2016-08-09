@@ -55,5 +55,20 @@ namespace sfe.bll
                 throw new PostAgentException("Error creating agent");
             }
         }
+
+        public static void Delete(int id)
+        {
+            try
+            {
+                Agent tmpAgent = Get(id);
+                tmpAgent.active = false;
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(e.Source, e.Message);
+                throw new DeleteAgentException("Error deleting agent");
+            }
+        }
     }
 }
