@@ -33,5 +33,11 @@ namespace sfe.test
         {
             Assert.IsNotNull(bll.AgentLogic.Get(1));
         }
+
+        [TestMethod]
+        public void TestMethodDeleteAgent()
+        {
+            bll.AgentLogic.Delete(1);
+        }
     }
 }
