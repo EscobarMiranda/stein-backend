@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace sfe.bll
 {
-    class ProductLogic
+    public class ProductLogic
     {
         private static DataClassesDataContext db = Database.Instance;
         public static List<Product> Get()
