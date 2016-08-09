@@ -27,5 +27,11 @@ namespace sfe.api.Controllers
         {
             bll.AgentLogic.Post(client);
         }
+
+        // DELETE api/<controller>
+        public void Delete(int id)
+        {
+            bll.AgentLogic.Delete(id);
+        }
     }
 }

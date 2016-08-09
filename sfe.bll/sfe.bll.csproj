@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\DeleteAgentException.cs" />
+    <Compile Include="Exceptions\DeleteClienException.cs" />
     <Compile Include="Exceptions\AgentListNotFoundException.cs" />
     <Compile Include="AgentLogic.cs" />
     <Compile Include="Exceptions\AgentNotFoundException.cs" />

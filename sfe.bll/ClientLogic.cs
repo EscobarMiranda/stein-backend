@@ -56,5 +56,20 @@ namespace sfe.bll
                 throw new PostClienException("Error creating client");
             }
         }
+
+        public static void Delete(int id)
+        {
+            try
+            {
+                Client tmpClient = Get(id);
+                tmpClient.active = false;
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(e.Source, e.Message);
+                throw new DeleteClienException("Error deleting client");
+            }
+        }
     }
 }
