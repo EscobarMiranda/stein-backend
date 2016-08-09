@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sfe.bll
 {
-    public class VisitsLogic
+    public class VisitLogic
     {
         private static DataClassesDataContext db = Database.Instance;
         public static List<Visit> Get()
