@@ -27,15 +27,5 @@ namespace sfe.api.Controllers
         {
             bll.AgentLogic.Post(client);
         }
-
-        // PUT api/<controller>/5
-        public void Put(Agent client)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }

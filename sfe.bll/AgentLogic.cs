@@ -16,10 +16,11 @@ namespace sfe.bll
         {
             try
             {
-                return (from agents in db.Agents where agents.active == true
+                return (from agents in db.Agents
+                        where agents.active == true
                         select agents).ToList();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
                 throw new AgentListNotFoundException("Agent list not found");
@@ -51,7 +52,7 @@ namespace sfe.bll
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new PostAgentException("Error creating Agent");
+                throw new PostAgentException("Error creating agent");
             }
         }
     }
