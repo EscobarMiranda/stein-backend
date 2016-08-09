@@ -50,6 +50,10 @@
     <Compile Include="Exceptions\PostClientException.cs" />
     <Compile Include="Exceptions\PostVisitException.cs" />
     <Compile Include="Exceptions\PostAgentException.cs" />
+    <Compile Include="Exceptions\ProductListNotFoundException.cs" />
+    <Compile Include="Exceptions\PostProductException.cs" />
+    <Compile Include="ProductLogic.cs" />
+    <Compile Include="Exceptions\ProductNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\VisitListNotFoundException.cs" />
     <Compile Include="Exceptions\VisitNotFoundException.cs" />
