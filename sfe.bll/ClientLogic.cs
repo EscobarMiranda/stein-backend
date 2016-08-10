@@ -29,14 +29,14 @@ namespace sfe.bll
             }
         }
 
-        public static List<Client> Get(ClientFilter filter)
+        public static List<Client> Get(int clientTypeId, int userId)
         {
             try
             {
                 return (from clients in db.Clients
                         where clients.active == true &&
-                        clients.FK_clientType == filter.clientTypeId &&
-                        clients.FK_user == filter.userId
+                        clients.FK_clientType == clientTypeId &&
+                        clients.FK_user == userId
                         select clients).ToList();
             }
             catch (Exception e)

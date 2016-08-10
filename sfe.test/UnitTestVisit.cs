@@ -26,6 +26,12 @@ namespace sfe.test
         }
 
         [TestMethod]
+        public void TestMethodGetVisitListByUserId()
+        {
+            Assert.IsTrue(bll.VisitLogic.GetByUser(1).Count > 0);
+        }
+
+        [TestMethod]
         public void TestMethodGetVisit()
         {
             Assert.IsNotNull(bll.VisitLogic.Get(1));

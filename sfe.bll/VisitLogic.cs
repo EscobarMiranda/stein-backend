@@ -16,13 +16,28 @@ namespace sfe.bll
         {
             try
             {
-                return (from visit in db.Visits
-                        select visit).ToList();
+                return (from visits in db.Visits
+                        select visits).ToList();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new VisitListNotFoundException("Visit list not founed");
+                throw new VisitListNotFoundException("Visit list not found");
+            }
+        }
+
+        public static List<Visit> GetByUser(int userId)
+        {
+            try
+            {
+                return (from visits in db.Visits
+                        where visits.FK_user == userId
+                        select visits).ToList();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(e.Source, e.Message);
+                throw new VisitListNotFoundException("Visit list not found");
             }
         }
 

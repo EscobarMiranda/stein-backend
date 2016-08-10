@@ -16,6 +16,12 @@ namespace sfe.api.Controllers
             return bll.VisitLogic.Get();
         }
 
+        // GET api/<controller>/userId/5
+        public IEnumerable<Visit> GetByUser(int userId)
+        {
+            return bll.VisitLogic.GetByUser(userId);
+        }
+
         // GET api/<controller>/5
         public Visit Get(int id)
         {

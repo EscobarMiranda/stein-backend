@@ -30,7 +30,7 @@ namespace sfe.test
         [TestMethod]
         public void TestMethodGetClientsByTypeByUser()
         {
-            Assert.IsTrue(bll.ClientLogic.Get(new ClientFilter() { clientTypeId=1, userId=1 }).Count > 0);
+            Assert.IsTrue(bll.ClientLogic.Get(1, 1).Count > 0);
         }
 
         [TestMethod]
