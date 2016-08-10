@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ReactionController.cs" />
     <Compile Include="Controllers\VisitController.cs" />

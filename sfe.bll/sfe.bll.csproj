@@ -54,6 +54,8 @@
     <Compile Include="Exceptions\PostAgentException.cs" />
     <Compile Include="Exceptions\ProductListNotFoundException.cs" />
     <Compile Include="Exceptions\PostProductException.cs" />
+    <Compile Include="Exceptions\LoginException.cs" />
+    <Compile Include="LoginLogic.cs" />
     <Compile Include="ProductLogic.cs" />
     <Compile Include="Exceptions\ProductNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

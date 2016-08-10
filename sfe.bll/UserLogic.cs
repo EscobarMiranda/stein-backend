@@ -9,50 +9,50 @@ using System.Threading.Tasks;
 
 namespace sfe.bll
 {
-    public class AgentLogic
+    public class UserLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Agent> Get()
+        public static List<User> Get()
         {
             try
             {
-                return (from agents in db.Agents
-                        where agents.active == true
-                        select agents).ToList();
+                return (from users in db.Users
+                        where users.active == true
+                        select users).ToList();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new AgentListNotFoundException("Agent list not found");
+                throw new UserListNotFoundException("User list not found");
             }
         }
 
-        public static Agent Get(int id)
+        public static User Get(int id)
         {
             try
             {
-                return (from agent in db.Agents
-                        where agent.idAgent == id
-                        select agent).Single();
+                return (from user in db.Users
+                        where user.idUser == id
+                        select user).Single();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new AgentNotFoundException("Agent not found");
+                throw new UserNotFoundException("User not found");
             }
         }
 
-        public static void Post(Agent agent)
+        public static void Post(User user)
         {
             try
             {
-                db.Agents.InsertOnSubmit(agent);
+                db.Users.InsertOnSubmit(user);
                 db.SubmitChanges();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new PostAgentException("Error creating agent");
+                throw new PostUserException("Error creating user");
             }
         }
 
@@ -60,14 +60,14 @@ namespace sfe.bll
         {
             try
             {
-                Agent tmpAgent = Get(id);
-                tmpAgent.active = false;
+                User tmpUser = Get(id);
+                tmpUser.active = false;
                 db.SubmitChanges();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry(e.Source, e.Message);
-                throw new DeleteAgentException("Error deleting agent");
+                throw new DeleteUserException("Error deleting user");
             }
         }
     }
