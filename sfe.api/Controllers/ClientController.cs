@@ -16,6 +16,12 @@ namespace sfe.api.Controllers
             return bll.ClientLogic.Get();
         }
 
+        // GET api/<controller>
+        public IEnumerable<Client> Get(ClientFilter filter)
+        {
+            return bll.ClientLogic.Get(filter);
+        }
+
         // GET api/<controller>/5
         public Client Get(int id)
         {
