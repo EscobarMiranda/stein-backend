@@ -28,11 +28,6 @@ namespace sfe.api.Controllers
             bll.ClientLogic.Post(client);
         }
 
-        // PUT api/<controller>/5
-        public void Put(Client client)
-        {
-        }
-
         // DELETE api/<controller>/5
         public void Delete(int id)
         {

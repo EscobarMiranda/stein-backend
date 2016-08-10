@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,23 @@ namespace sfe.bll
             {
                 return (from clients in db.Clients
                         where clients.active == true
+                        select clients).ToList();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(e.Source, e.Message);
+                throw new ClientListNotFoundException("Client list not found");
+            }
+        }
+
+        public static List<Client> Get(int clientTypeId, int userId)
+        {
+            try
+            {
+                return (from clients in db.Clients
+                        where clients.active == true &&
+                        clients.FK_clientType == clientTypeId &&
+                        clients.FK_user == userId
                         select clients).ToList();
             }
             catch (Exception e)
