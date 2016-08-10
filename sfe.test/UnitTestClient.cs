@@ -28,6 +28,12 @@ namespace sfe.test
         }
 
         [TestMethod]
+        public void TestMethodGetClientsByTypeByUser()
+        {
+            Assert.IsTrue(bll.ClientLogic.Get(new ClientFilter() { clientTypeId=1, userId=1 }).Count > 0);
+        }
+
+        [TestMethod]
         public void TestMethodGetClient()
         {
             Assert.IsNotNull(bll.ClientLogic.Get(1));

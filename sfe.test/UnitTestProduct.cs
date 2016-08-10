@@ -13,7 +13,7 @@ namespace sfe.test
         public void TestMethodPostProduct()
         {
             product.name = "acetaminofen";
-            product.FK_salesBook = 1;
+            product.FK_visit = 1;
             product.active = true;
         }
 

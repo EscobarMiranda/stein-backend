@@ -8,30 +8,30 @@ using System.Web.Http;
 
 namespace sfe.api.Controllers
 {
-    public class AgentController : ApiController
+    public class UserController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<Agent> Get()
+        public IEnumerable<User> Get()
         {
-            return bll.AgentLogic.Get();
+            return bll.UserLogic.Get();
         }
 
         // GET api/<controller>/5
-        public Agent Get(int id)
+        public User Get(int id)
         {
-            return bll.AgentLogic.Get(id);
+            return bll.UserLogic.Get(id);
         }
 
         // POST api/<controller>
-        public void Post(Agent client)
+        public void Post(User user)
         {
-            bll.AgentLogic.Post(client);
+            bll.UserLogic.Post(user);
         }
 
         // DELETE api/<controller>
         public void Delete(int id)
         {
-            bll.AgentLogic.Delete(id);
+            bll.UserLogic.Delete(id);
         }
     }
 }
