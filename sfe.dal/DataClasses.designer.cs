@@ -33,6 +33,9 @@ namespace sfe.dal
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
+    partial void InsertVisit(Visit instance);
+    partial void UpdateVisit(Visit instance);
+    partial void DeleteVisit(Visit instance);
     partial void InsertClientType(ClientType instance);
     partial void UpdateClientType(ClientType instance);
     partial void DeleteClientType(ClientType instance);
@@ -51,9 +54,6 @@ namespace sfe.dal
     partial void InsertUserType(UserType instance);
     partial void UpdateUserType(UserType instance);
     partial void DeleteUserType(UserType instance);
-    partial void InsertVisit(Visit instance);
-    partial void UpdateVisit(Visit instance);
-    partial void DeleteVisit(Visit instance);
     #endregion
 		
 		public DataClassesDataContext() : 
@@ -91,6 +91,14 @@ namespace sfe.dal
 			get
 			{
 				return this.GetTable<Client>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Visit> Visits
+		{
+			get
+			{
+				return this.GetTable<Visit>();
 			}
 		}
 		
@@ -139,14 +147,6 @@ namespace sfe.dal
 			get
 			{
 				return this.GetTable<UserType>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Visit> Visits
-		{
-			get
-			{
-				return this.GetTable<Visit>();
 			}
 		}
 	}
@@ -803,6 +803,387 @@ namespace sfe.dal
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Visits")]
+	public partial class Visit : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idVisit;
+		
+		private int _FK_user;
+		
+		private int _FK_client;
+		
+		private int _FK_reaction;
+		
+		private string _comment;
+		
+		private System.DateTime _date;
+		
+		private System.Nullable<float> _latitude;
+		
+		private System.Nullable<float> _longitude;
+		
+		private EntitySet<ProductsPerVisit> _ProductsPerVisits;
+		
+		private EntityRef<Client> _Client;
+		
+		private EntityRef<Reaction> _Reaction;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidVisitChanging(int value);
+    partial void OnidVisitChanged();
+    partial void OnFK_userChanging(int value);
+    partial void OnFK_userChanged();
+    partial void OnFK_clientChanging(int value);
+    partial void OnFK_clientChanged();
+    partial void OnFK_reactionChanging(int value);
+    partial void OnFK_reactionChanged();
+    partial void OncommentChanging(string value);
+    partial void OncommentChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    partial void OnlatitudeChanging(System.Nullable<float> value);
+    partial void OnlatitudeChanged();
+    partial void OnlongitudeChanging(System.Nullable<float> value);
+    partial void OnlongitudeChanged();
+    #endregion
+		
+		public Visit()
+		{
+			this._ProductsPerVisits = new EntitySet<ProductsPerVisit>(new Action<ProductsPerVisit>(this.attach_ProductsPerVisits), new Action<ProductsPerVisit>(this.detach_ProductsPerVisits));
+			this._Client = default(EntityRef<Client>);
+			this._Reaction = default(EntityRef<Reaction>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idVisit", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idVisit
+		{
+			get
+			{
+				return this._idVisit;
+			}
+			set
+			{
+				if ((this._idVisit != value))
+				{
+					this.OnidVisitChanging(value);
+					this.SendPropertyChanging();
+					this._idVisit = value;
+					this.SendPropertyChanged("idVisit");
+					this.OnidVisitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_user", DbType="Int NOT NULL")]
+		public int FK_user
+		{
+			get
+			{
+				return this._FK_user;
+			}
+			set
+			{
+				if ((this._FK_user != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFK_userChanging(value);
+					this.SendPropertyChanging();
+					this._FK_user = value;
+					this.SendPropertyChanged("FK_user");
+					this.OnFK_userChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_client", DbType="Int NOT NULL")]
+		public int FK_client
+		{
+			get
+			{
+				return this._FK_client;
+			}
+			set
+			{
+				if ((this._FK_client != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFK_clientChanging(value);
+					this.SendPropertyChanging();
+					this._FK_client = value;
+					this.SendPropertyChanged("FK_client");
+					this.OnFK_clientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_reaction", DbType="Int NOT NULL")]
+		public int FK_reaction
+		{
+			get
+			{
+				return this._FK_reaction;
+			}
+			set
+			{
+				if ((this._FK_reaction != value))
+				{
+					if (this._Reaction.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFK_reactionChanging(value);
+					this.SendPropertyChanging();
+					this._FK_reaction = value;
+					this.SendPropertyChanged("FK_reaction");
+					this.OnFK_reactionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comment", DbType="VarChar(400) NOT NULL", CanBeNull=false)]
+		public string comment
+		{
+			get
+			{
+				return this._comment;
+			}
+			set
+			{
+				if ((this._comment != value))
+				{
+					this.OncommentChanging(value);
+					this.SendPropertyChanging();
+					this._comment = value;
+					this.SendPropertyChanged("comment");
+					this.OncommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="Real")]
+		public System.Nullable<float> latitude
+		{
+			get
+			{
+				return this._latitude;
+			}
+			set
+			{
+				if ((this._latitude != value))
+				{
+					this.OnlatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._latitude = value;
+					this.SendPropertyChanged("latitude");
+					this.OnlatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="Real")]
+		public System.Nullable<float> longitude
+		{
+			get
+			{
+				return this._longitude;
+			}
+			set
+			{
+				if ((this._longitude != value))
+				{
+					this.OnlongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_ProductsPerVisit", Storage="_ProductsPerVisits", ThisKey="idVisit", OtherKey="FK_visit")]
+		public EntitySet<ProductsPerVisit> ProductsPerVisits
+		{
+			get
+			{
+				return this._ProductsPerVisits;
+			}
+			set
+			{
+				this._ProductsPerVisits.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Visit", Storage="_Client", ThisKey="FK_client", OtherKey="idClient", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.Visits.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.Visits.Add(this);
+						this._FK_client = value.idClient;
+					}
+					else
+					{
+						this._FK_client = default(int);
+					}
+					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reaction_Visit", Storage="_Reaction", ThisKey="FK_reaction", OtherKey="idReaction", IsForeignKey=true)]
+		public Reaction Reaction
+		{
+			get
+			{
+				return this._Reaction.Entity;
+			}
+			set
+			{
+				Reaction previousValue = this._Reaction.Entity;
+				if (((previousValue != value) 
+							|| (this._Reaction.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Reaction.Entity = null;
+						previousValue.Visits.Remove(this);
+					}
+					this._Reaction.Entity = value;
+					if ((value != null))
+					{
+						value.Visits.Add(this);
+						this._FK_reaction = value.idReaction;
+					}
+					else
+					{
+						this._FK_reaction = default(int);
+					}
+					this.SendPropertyChanged("Reaction");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Visit", Storage="_User", ThisKey="FK_user", OtherKey="idUser", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Visits.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Visits.Add(this);
+						this._FK_user = value.idUser;
+					}
+					else
+					{
+						this._FK_user = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ProductsPerVisits(ProductsPerVisit entity)
+		{
+			this.SendPropertyChanging();
+			entity.Visit = this;
+		}
+		
+		private void detach_ProductsPerVisits(ProductsPerVisit entity)
+		{
+			this.SendPropertyChanging();
+			entity.Visit = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ClientTypes")]
 	public partial class ClientType : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -927,8 +1308,6 @@ namespace sfe.dal
 		
 		private string _name;
 		
-		private int _FK_visit;
-		
 		private bool _active;
 		
 		private EntitySet<ProductsPerVisit> _ProductsPerVisits;
@@ -941,8 +1320,6 @@ namespace sfe.dal
     partial void OnidProductChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
-    partial void OnFK_visitChanging(int value);
-    partial void OnFK_visitChanged();
     partial void OnactiveChanging(bool value);
     partial void OnactiveChanged();
     #endregion
@@ -989,26 +1366,6 @@ namespace sfe.dal
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_visit", DbType="Int NOT NULL")]
-		public int FK_visit
-		{
-			get
-			{
-				return this._FK_visit;
-			}
-			set
-			{
-				if ((this._FK_visit != value))
-				{
-					this.OnFK_visitChanging(value);
-					this.SendPropertyChanging();
-					this._FK_visit = value;
-					this.SendPropertyChanged("FK_visit");
-					this.OnFK_visitChanged();
 				}
 			}
 		}
@@ -1093,9 +1450,9 @@ namespace sfe.dal
 		
 		private int _quantity;
 		
-		private EntityRef<Product> _Product;
-		
 		private EntityRef<Visit> _Visit;
+		
+		private EntityRef<Product> _Product;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1113,8 +1470,8 @@ namespace sfe.dal
 		
 		public ProductsPerVisit()
 		{
-			this._Product = default(EntityRef<Product>);
 			this._Visit = default(EntityRef<Visit>);
+			this._Product = default(EntityRef<Product>);
 			OnCreated();
 		}
 		
@@ -1206,40 +1563,6 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductsPerVisit", Storage="_Product", ThisKey="FK_product", OtherKey="idProduct", IsForeignKey=true)]
-		public Product Product
-		{
-			get
-			{
-				return this._Product.Entity;
-			}
-			set
-			{
-				Product previousValue = this._Product.Entity;
-				if (((previousValue != value) 
-							|| (this._Product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Product.Entity = null;
-						previousValue.ProductsPerVisits.Remove(this);
-					}
-					this._Product.Entity = value;
-					if ((value != null))
-					{
-						value.ProductsPerVisits.Add(this);
-						this._FK_product = value.idProduct;
-					}
-					else
-					{
-						this._FK_product = default(int);
-					}
-					this.SendPropertyChanged("Product");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_ProductsPerVisit", Storage="_Visit", ThisKey="FK_visit", OtherKey="idVisit", IsForeignKey=true)]
 		public Visit Visit
 		{
@@ -1270,6 +1593,40 @@ namespace sfe.dal
 						this._FK_visit = default(int);
 					}
 					this.SendPropertyChanged("Visit");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductsPerVisit", Storage="_Product", ThisKey="FK_product", OtherKey="idProduct", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.ProductsPerVisits.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.ProductsPerVisits.Add(this);
+						this._FK_product = value.idProduct;
+					}
+					else
+					{
+						this._FK_product = default(int);
+					}
+					this.SendPropertyChanged("Product");
 				}
 			}
 		}
@@ -2039,387 +2396,6 @@ namespace sfe.dal
 		{
 			this.SendPropertyChanging();
 			entity.UserType = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Visits")]
-	public partial class Visit : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idVisit;
-		
-		private int _FK_user;
-		
-		private int _FK_client;
-		
-		private int _FK_reaction;
-		
-		private string _comment;
-		
-		private System.DateTime _date;
-		
-		private System.Nullable<float> _latitude;
-		
-		private System.Nullable<float> _longitude;
-		
-		private EntitySet<ProductsPerVisit> _ProductsPerVisits;
-		
-		private EntityRef<Client> _Client;
-		
-		private EntityRef<Reaction> _Reaction;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidVisitChanging(int value);
-    partial void OnidVisitChanged();
-    partial void OnFK_userChanging(int value);
-    partial void OnFK_userChanged();
-    partial void OnFK_clientChanging(int value);
-    partial void OnFK_clientChanged();
-    partial void OnFK_reactionChanging(int value);
-    partial void OnFK_reactionChanged();
-    partial void OncommentChanging(string value);
-    partial void OncommentChanged();
-    partial void OndateChanging(System.DateTime value);
-    partial void OndateChanged();
-    partial void OnlatitudeChanging(System.Nullable<float> value);
-    partial void OnlatitudeChanged();
-    partial void OnlongitudeChanging(System.Nullable<float> value);
-    partial void OnlongitudeChanged();
-    #endregion
-		
-		public Visit()
-		{
-			this._ProductsPerVisits = new EntitySet<ProductsPerVisit>(new Action<ProductsPerVisit>(this.attach_ProductsPerVisits), new Action<ProductsPerVisit>(this.detach_ProductsPerVisits));
-			this._Client = default(EntityRef<Client>);
-			this._Reaction = default(EntityRef<Reaction>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idVisit", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idVisit
-		{
-			get
-			{
-				return this._idVisit;
-			}
-			set
-			{
-				if ((this._idVisit != value))
-				{
-					this.OnidVisitChanging(value);
-					this.SendPropertyChanging();
-					this._idVisit = value;
-					this.SendPropertyChanged("idVisit");
-					this.OnidVisitChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_user", DbType="Int NOT NULL")]
-		public int FK_user
-		{
-			get
-			{
-				return this._FK_user;
-			}
-			set
-			{
-				if ((this._FK_user != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_userChanging(value);
-					this.SendPropertyChanging();
-					this._FK_user = value;
-					this.SendPropertyChanged("FK_user");
-					this.OnFK_userChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_client", DbType="Int NOT NULL")]
-		public int FK_client
-		{
-			get
-			{
-				return this._FK_client;
-			}
-			set
-			{
-				if ((this._FK_client != value))
-				{
-					if (this._Client.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_clientChanging(value);
-					this.SendPropertyChanging();
-					this._FK_client = value;
-					this.SendPropertyChanged("FK_client");
-					this.OnFK_clientChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_reaction", DbType="Int NOT NULL")]
-		public int FK_reaction
-		{
-			get
-			{
-				return this._FK_reaction;
-			}
-			set
-			{
-				if ((this._FK_reaction != value))
-				{
-					if (this._Reaction.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFK_reactionChanging(value);
-					this.SendPropertyChanging();
-					this._FK_reaction = value;
-					this.SendPropertyChanged("FK_reaction");
-					this.OnFK_reactionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comment", DbType="VarChar(400) NOT NULL", CanBeNull=false)]
-		public string comment
-		{
-			get
-			{
-				return this._comment;
-			}
-			set
-			{
-				if ((this._comment != value))
-				{
-					this.OncommentChanging(value);
-					this.SendPropertyChanging();
-					this._comment = value;
-					this.SendPropertyChanged("comment");
-					this.OncommentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
-		public System.DateTime date
-		{
-			get
-			{
-				return this._date;
-			}
-			set
-			{
-				if ((this._date != value))
-				{
-					this.OndateChanging(value);
-					this.SendPropertyChanging();
-					this._date = value;
-					this.SendPropertyChanged("date");
-					this.OndateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="Real")]
-		public System.Nullable<float> latitude
-		{
-			get
-			{
-				return this._latitude;
-			}
-			set
-			{
-				if ((this._latitude != value))
-				{
-					this.OnlatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._latitude = value;
-					this.SendPropertyChanged("latitude");
-					this.OnlatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="Real")]
-		public System.Nullable<float> longitude
-		{
-			get
-			{
-				return this._longitude;
-			}
-			set
-			{
-				if ((this._longitude != value))
-				{
-					this.OnlongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._longitude = value;
-					this.SendPropertyChanged("longitude");
-					this.OnlongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Visit_ProductsPerVisit", Storage="_ProductsPerVisits", ThisKey="idVisit", OtherKey="FK_visit")]
-		public EntitySet<ProductsPerVisit> ProductsPerVisits
-		{
-			get
-			{
-				return this._ProductsPerVisits;
-			}
-			set
-			{
-				this._ProductsPerVisits.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Visit", Storage="_Client", ThisKey="FK_client", OtherKey="idClient", IsForeignKey=true)]
-		public Client Client
-		{
-			get
-			{
-				return this._Client.Entity;
-			}
-			set
-			{
-				Client previousValue = this._Client.Entity;
-				if (((previousValue != value) 
-							|| (this._Client.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Client.Entity = null;
-						previousValue.Visits.Remove(this);
-					}
-					this._Client.Entity = value;
-					if ((value != null))
-					{
-						value.Visits.Add(this);
-						this._FK_client = value.idClient;
-					}
-					else
-					{
-						this._FK_client = default(int);
-					}
-					this.SendPropertyChanged("Client");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reaction_Visit", Storage="_Reaction", ThisKey="FK_reaction", OtherKey="idReaction", IsForeignKey=true)]
-		public Reaction Reaction
-		{
-			get
-			{
-				return this._Reaction.Entity;
-			}
-			set
-			{
-				Reaction previousValue = this._Reaction.Entity;
-				if (((previousValue != value) 
-							|| (this._Reaction.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Reaction.Entity = null;
-						previousValue.Visits.Remove(this);
-					}
-					this._Reaction.Entity = value;
-					if ((value != null))
-					{
-						value.Visits.Add(this);
-						this._FK_reaction = value.idReaction;
-					}
-					else
-					{
-						this._FK_reaction = default(int);
-					}
-					this.SendPropertyChanged("Reaction");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Visit", Storage="_User", ThisKey="FK_user", OtherKey="idUser", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Visits.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Visits.Add(this);
-						this._FK_user = value.idUser;
-					}
-					else
-					{
-						this._FK_user = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ProductsPerVisits(ProductsPerVisit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Visit = this;
-		}
-		
-		private void detach_ProductsPerVisits(ProductsPerVisit entity)
-		{
-			this.SendPropertyChanging();
-			entity.Visit = null;
 		}
 	}
 }

@@ -13,8 +13,8 @@ namespace sfe.test
         public void TestMethodPostProduct()
         {
             product.name = "acetaminofen";
-            product.FK_visit = 1;
             product.active = true;
+            bll.ProductLogic.Post(product);
         }
 
         [TestMethod]

@@ -28,6 +28,22 @@
       <Association Name="User_Client" Member="User" ThisKey="FK_user" OtherKey="idUser" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Visits" Member="Visits">
+    <Type Name="Visit">
+      <Column Name="idVisit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FK_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_reaction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="comment" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Association Name="Visit_ProductsPerVisit" Member="ProductsPerVisits" ThisKey="idVisit" OtherKey="FK_visit" Type="ProductsPerVisit" />
+      <Association Name="Client_Visit" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
+      <Association Name="Reaction_Visit" Member="Reaction" ThisKey="FK_reaction" OtherKey="idReaction" Type="Reaction" IsForeignKey="true" />
+      <Association Name="User_Visit" Member="User" ThisKey="FK_user" OtherKey="idUser" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ClientTypes" Member="ClientTypes">
     <Type Name="ClientType">
       <Column Name="idClientType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -39,7 +55,6 @@
     <Type Name="Product">
       <Column Name="idProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="FK_visit" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Product_ProductsPerVisit" Member="ProductsPerVisits" ThisKey="idProduct" OtherKey="FK_product" Type="ProductsPerVisit" />
     </Type>
@@ -50,8 +65,8 @@
       <Column Name="FK_visit" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FK_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Product_ProductsPerVisit" Member="Product" ThisKey="FK_product" OtherKey="idProduct" Type="Product" IsForeignKey="true" />
       <Association Name="Visit_ProductsPerVisit" Member="Visit" ThisKey="FK_visit" OtherKey="idVisit" Type="Visit" IsForeignKey="true" />
+      <Association Name="Product_ProductsPerVisit" Member="Product" ThisKey="FK_product" OtherKey="idProduct" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Reactions" Member="Reactions">
@@ -89,22 +104,6 @@
       <Column Name="idAgentType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="UserType_User" Member="Users" ThisKey="idAgentType" OtherKey="FK_userType" Type="User" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Visits" Member="Visits">
-    <Type Name="Visit">
-      <Column Name="idVisit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FK_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FK_reaction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="comment" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
-      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Association Name="Visit_ProductsPerVisit" Member="ProductsPerVisits" ThisKey="idVisit" OtherKey="FK_visit" Type="ProductsPerVisit" />
-      <Association Name="Client_Visit" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
-      <Association Name="Reaction_Visit" Member="Reaction" ThisKey="FK_reaction" OtherKey="idReaction" Type="Reaction" IsForeignKey="true" />
-      <Association Name="User_Visit" Member="User" ThisKey="FK_user" OtherKey="idUser" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
