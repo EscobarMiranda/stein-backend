@@ -21,7 +21,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ProductListNotFoundException("Product list not found");
             }
         }
@@ -36,7 +36,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ProductNotFoundException("Product not found");
             }
         }
@@ -50,7 +50,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new PostProductException("Error creating product");
             }
         }

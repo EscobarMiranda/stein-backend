@@ -20,7 +20,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ReactionListNotFoundException("Reaction list not found");
             }
         }

@@ -24,7 +24,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ClientListNotFoundException("Client list not found");
             }
         }
@@ -41,7 +41,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ClientListNotFoundException("Client list not found");
             }
         }
@@ -56,7 +56,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ClientNotFoundException("Client not found");
             }
         }
@@ -70,7 +70,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new PostClienException("Error creating client");
             }
         }
@@ -85,7 +85,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new DeleteClienException("Error deleting client");
             }
         }
