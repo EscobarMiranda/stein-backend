@@ -12,7 +12,7 @@ namespace sfe.bll
     public class UserLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<User> Get()
+        public static List<User> Read()
         {
             try
             {
@@ -27,7 +27,7 @@ namespace sfe.bll
             }
         }
 
-        public static User Get(int id)
+        public static User Read(int id)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace sfe.bll
             }
         }
 
-        public static void Post(User user)
+        public static void Create(User user)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace sfe.bll
         {
             try
             {
-                User tmpUser = Get(id);
+                User tmpUser = Read(id);
                 tmpUser.active = false;
                 db.SubmitChanges();
             }

@@ -12,7 +12,7 @@ namespace sfe.bll
     public class VisitLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Visit> Get()
+        public static List<Visit> Read()
         {
             try
             {
@@ -26,7 +26,7 @@ namespace sfe.bll
             }
         }
 
-        public static List<Visit> GetByUser(int userId)
+        public static List<Visit> ReadByUser(int userId)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace sfe.bll
             }
         }
 
-        public static Visit Get(int id)
+        public static Visit Read(int id)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace sfe.bll
             }
         }
 
-        public static void Post(Visit visit)
+        public static void Create(Visit visit)
         {
             try
             {

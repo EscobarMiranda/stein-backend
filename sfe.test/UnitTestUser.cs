@@ -18,19 +18,19 @@ namespace sfe.test
             user.password = "1234test";
             user.creationDate = new DateTime(2016,01,01);
             user.country = "Costa Rica";
-            bll.UserLogic.Post(user);
+            bll.UserLogic.Create(user);
         }
 
         [TestMethod]
         public void TestMethodGetUsers()
         {
-            Assert.IsTrue(bll.UserLogic.Get().Count > 0);
+            Assert.IsTrue(bll.UserLogic.Read().Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetUser()
         {
-            Assert.IsNotNull(bll.UserLogic.Get(1));
+            Assert.IsNotNull(bll.UserLogic.Read(1));
         }
 
         [TestMethod]

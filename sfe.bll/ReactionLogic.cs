@@ -11,7 +11,7 @@ namespace sfe.bll
     public class ReactionLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Reaction> Get()
+        public static List<Reaction> Read()
         {
             try
             {

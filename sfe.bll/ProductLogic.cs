@@ -11,7 +11,7 @@ namespace sfe.bll
     public class ProductLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Product> Get()
+        public static List<Product> Read()
         {
             try
             {
@@ -26,7 +26,7 @@ namespace sfe.bll
             }
         }
 
-        public static Product Get(int id)
+        public static Product Read(int id)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace sfe.bll
             }
         }
 
-        public static void Post(Product product)
+        public static void Create(Product product)
         {
             try
             {

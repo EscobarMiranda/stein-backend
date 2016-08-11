@@ -14,7 +14,7 @@ namespace sfe.bll
     public class ClientLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Client> Get()
+        public static List<Client> Read()
         {
             try
             {
@@ -29,7 +29,7 @@ namespace sfe.bll
             }
         }
 
-        public static List<Client> Get(int clientTypeId, int userId)
+        public static List<Client> Read(int clientTypeId, int userId)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace sfe.bll
             }
         }
 
-        public static Client Get(int id)
+        public static Client Read(int id)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace sfe.bll
             }
         }
 
-        public static void Post(Client client)
+        public static void Create(Client client)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace sfe.bll
         {
             try
             {
-                Client tmpClient = Get(id);
+                Client tmpClient = Read(id);
                 tmpClient.active = false;
                 db.SubmitChanges();
             }

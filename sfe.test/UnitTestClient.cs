@@ -18,25 +18,25 @@ namespace sfe.test
             client.active = true;
             client.FK_clientType = 1;
             client.creationDate = new System.DateTime(2016,01,01);
-            bll.ClientLogic.Post(client);
+            bll.ClientLogic.Create(client);
         }
 
         [TestMethod]
         public void TestMethodGetClients()
         {
-            Assert.IsTrue(bll.ClientLogic.Get().Count > 0);
+            Assert.IsTrue(bll.ClientLogic.Read().Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetClientsByTypeByUser()
         {
-            Assert.IsTrue(bll.ClientLogic.Get(1, 1).Count > 0);
+            Assert.IsTrue(bll.ClientLogic.Read(1, 1).Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetClient()
         {
-            Assert.IsNotNull(bll.ClientLogic.Get(1));
+            Assert.IsNotNull(bll.ClientLogic.Read(1));
         }
 
         [TestMethod]

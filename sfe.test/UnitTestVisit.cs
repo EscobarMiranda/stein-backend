@@ -16,25 +16,25 @@ namespace sfe.test
             visit.FK_user = 1;
             visit.FK_client = 1;
             visit.FK_reaction = 1;
-            bll.VisitLogic.Post(visit);
+            bll.VisitLogic.Create(visit);
         }
 
         [TestMethod]
         public void TestMethodGetVisitList()
         {
-            Assert.IsTrue(bll.VisitLogic.Get().Count > 0);
+            Assert.IsTrue(bll.VisitLogic.Read().Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetVisitListByUserId()
         {
-            Assert.IsTrue(bll.VisitLogic.GetByUser(1).Count > 0);
+            Assert.IsTrue(bll.VisitLogic.ReadByUser(1).Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetVisit()
         {
-            Assert.IsNotNull(bll.VisitLogic.Get(1));
+            Assert.IsNotNull(bll.VisitLogic.Read(1));
         }
     }
 }

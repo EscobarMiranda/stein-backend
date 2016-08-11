@@ -13,19 +13,19 @@ namespace sfe.api.Controllers
         // GET api/<controller>
         public IEnumerable<User> Get()
         {
-            return bll.UserLogic.Get();
+            return bll.UserLogic.Read();
         }
 
         // GET api/<controller>/5
         public User Get(int id)
         {
-            return bll.UserLogic.Get(id);
+            return bll.UserLogic.Read(id);
         }
 
         // POST api/<controller>
         public void Post(User user)
         {
-            bll.UserLogic.Post(user);
+            bll.UserLogic.Create(user);
         }
 
         // DELETE api/<controller>

@@ -9,7 +9,7 @@ namespace sfe.test
         [TestMethod]
         public void TestMethodGetReactionList()
         {
-            Assert.IsTrue(bll.ReactionLogic.Get().Count > 0);
+            Assert.IsTrue(bll.ReactionLogic.Read().Count > 0);
         }
     }
 }
