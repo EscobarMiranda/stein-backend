@@ -18,6 +18,9 @@ namespace sfe.test
             user.password = "1234test";
             user.creationDate = new DateTime(2016,01,01);
             user.country = "Costa Rica";
+            user.email = "test@mail.com";
+            user.active = true;
+            user.FK_userType = 1;
             bll.UserLogic.Create(user);
         }
 
@@ -31,6 +34,22 @@ namespace sfe.test
         public void TestMethodGetUser()
         {
             Assert.IsNotNull(bll.UserLogic.Read(1));
+        }
+
+        [TestMethod]
+        public void TestMethodPutUser()
+        {
+            user.idUser = 4;
+            user.name = "Test4";
+            user.lastName = "Test2";
+            user.username = "Tes2";
+            user.password = "1234test";
+            user.creationDate = new DateTime(2016, 02, 02);
+            user.country = "Costa Rica";
+            user.email = "test@mail.com";
+            user.active = true;
+            user.FK_userType = 1;
+            bll.UserLogic.Put(user);
         }
 
         [TestMethod]

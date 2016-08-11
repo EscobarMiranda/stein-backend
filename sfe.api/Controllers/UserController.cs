@@ -33,5 +33,11 @@ namespace sfe.api.Controllers
         {
             bll.UserLogic.Delete(id);
         }
+
+        // PUT api/<controller>
+        public void Put(User user)
+        {
+            bll.UserLogic.Update(user);
+        }
     }
 }

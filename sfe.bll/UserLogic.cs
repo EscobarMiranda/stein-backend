@@ -70,5 +70,44 @@ namespace sfe.bll
                 throw new DeleteUserException("Error deleting user");
             }
         }
+
+        public static bool Update(User user)
+        {
+            Boolean res = false;
+            try
+            {
+                if (user == null)
+                {
+                    throw new Exception("The user can't be null");
+                }
+                User tmpUser = Read(user.idUser);
+                if (tmpUser == null)
+                {
+                    throw new Exception(string.Format("The user {0} can't be found", user.idUser));
+                }
+                tmpUser.name = user.name;
+                tmpUser.lastName = user.lastName;
+                tmpUser.username = user.username;
+                tmpUser.password = user.password;
+                tmpUser.country = user.country;
+                tmpUser.province = user.province;
+                tmpUser.address1 = user.address1;
+                tmpUser.address2 = user.address2;
+                tmpUser.zone = user.zone;
+                tmpUser.email = user.email;
+                tmpUser.phone1 = user.phone1;
+                tmpUser.phone2 = user.phone2;
+                tmpUser.FK_userType = user.FK_userType;
+                db.SubmitChanges();
+
+                res = true;
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new PutUserException(string.Format("Error update user ({0})", e.Message));
+            }
+            return res;
+        }
     }
 }
