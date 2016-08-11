@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace sfe.bll
     public class ClientLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Client> Get()
+        public static List<Client> Read()
         {
             try
             {
@@ -23,12 +24,29 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ClientListNotFoundException("Client list not found");
             }
         }
 
-        public static Client Get(int id)
+        public static List<Client> Read(int clientTypeId, int userId)
+        {
+            try
+            {
+                return (from clients in db.Clients
+                        where clients.active == true &&
+                        clients.FK_clientType == clientTypeId &&
+                        clients.FK_user == userId
+                        select clients).ToList();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new ClientListNotFoundException("Client list not found");
+            }
+        }
+
+        public static Client Read(int id)
         {
             try
             {
@@ -38,12 +56,12 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ClientNotFoundException("Client not found");
             }
         }
 
-        public static void Post(Client client)
+        public static void Create(Client client)
         {
             try
             {
@@ -52,7 +70,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new PostClienException("Error creating client");
             }
         }
@@ -61,13 +79,13 @@ namespace sfe.bll
         {
             try
             {
-                Client tmpClient = Get(id);
+                Client tmpClient = Read(id);
                 tmpClient.active = false;
                 db.SubmitChanges();
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new DeleteClienException("Error deleting client");
             }
         }

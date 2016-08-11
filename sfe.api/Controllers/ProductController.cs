@@ -13,19 +13,19 @@ namespace sfe.api.Controllers
         // GET api/<controller>
         public IEnumerable<Product> Get()
         {
-            return bll.ProductLogic.Get();
+            return bll.ProductLogic.Read();
         }
 
         // GET api/<controller>/5
         public Product Get(int id)
         {
-            return bll.ProductLogic.Get(id);
+            return bll.ProductLogic.Read(id);
         }
 
         // POST api/<controller>
         public void Post(Product product)
         {
-            bll.ProductLogic.Post(product);
+            bll.ProductLogic.Create(product);
         }
     }
 }

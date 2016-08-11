@@ -13,7 +13,7 @@ namespace sfe.api.Controllers
         // GET api/<controller>
         public IEnumerable<Reaction> Get()
         {
-            return bll.ReactionLogic.Get();
+            return bll.ReactionLogic.Read();
         }
     }
 }

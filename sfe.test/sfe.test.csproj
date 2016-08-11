@@ -53,7 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="UnitTestProduct.cs" />
-    <Compile Include="UnitTestAgent.cs" />
+    <Compile Include="UnitTestUser.cs" />
     <Compile Include="UnitTestReaction.cs" />
     <Compile Include="UnitTestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

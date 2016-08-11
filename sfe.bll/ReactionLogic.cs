@@ -11,7 +11,7 @@ namespace sfe.bll
     public class ReactionLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Reaction> Get()
+        public static List<Reaction> Read()
         {
             try
             {
@@ -20,7 +20,7 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new ReactionListNotFoundException("Reaction list not found");
             }
         }

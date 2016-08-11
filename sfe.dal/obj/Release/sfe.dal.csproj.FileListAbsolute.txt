@@ -1,5 +1,0 @@
-C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\bin\Release\sfe.dal.dll.config
-C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\bin\Release\sfe.dal.dll
-C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\bin\Release\sfe.dal.pdb
-C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\obj\Release\sfe.dal.dll
-C:\Users\kevem94\Documents\Visual Studio 2015\Projects\API\sfe.dal\obj\Release\sfe.dal.pdb
