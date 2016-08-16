@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace sfe.bll.Exceptions
 {
-    public class PostClienException : Exception
+    [Serializable]
+    internal class PostClientException : Exception
     {
-        public PostClienException()
+        public PostClientException()
         {
         }
 
-        public PostClienException(string message)
-            : base(message)
+        public PostClientException(string message) : base(message)
         {
         }
 
-        public PostClienException(string message, Exception inner)
-            : base(message, inner)
+        public PostClientException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected PostClientException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

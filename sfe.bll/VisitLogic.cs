@@ -12,21 +12,36 @@ namespace sfe.bll
     public class VisitLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<Visit> Get()
+        public static List<Visit> Read()
         {
             try
             {
-                return (from visit in db.Visits
-                        select visit).ToList();
+                return (from visits in db.Visits
+                        select visits).ToList();
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new VisitListNotFoundException("Visit list not founed");
             }
         }
 
-        public static Visit Get(int id)
+        public static List<Visit> ReadByUser(int userId)
+        {
+            try
+            {
+                return (from visits in db.Visits
+                        where visits.FK_user == userId
+                        select visits).ToList();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new VisitListNotFoundException("Visit list not founed");
+            }
+        }
+
+        public static Visit Read(int id)
         {
             try
             {
@@ -36,12 +51,12 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new VisitNotFoundException("Visit not found");
             }
         }
 
-        public static void Post(Visit visit)
+        public static void Create(Visit visit)
         {
             try
             {
@@ -50,8 +65,26 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry(e.Source, e.Message);
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new PostVisitException("Error creating visit");
+            }
+        }
+
+        public static void Update(Visit visit)
+        {
+            try
+            {
+                Visit tmpVisit = Read(visit.idVisit);
+                tmpVisit.FK_reaction = visit.FK_reaction;
+                tmpVisit.comment = visit.comment;
+                tmpVisit.latitude = visit.latitude;
+                tmpVisit.longitude = visit.longitude;
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new UpdateVisitException("Error updating visit");
             }
         }
     }

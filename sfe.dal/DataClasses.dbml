@@ -1,47 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SFE" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-R0HL87E\SQLEXPRESS;Initial Catalog=SFE;Integrated Security=True" SettingsObjectName="sfe.dal.Properties.Settings" SettingsPropertyName="SFEConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Agents" Member="Agents">
-    <Type Name="Agent">
-      <Column Name="idAgent" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="lastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="idGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="creationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="country" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="address1" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
-      <Column Name="address2" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
-      <Column Name="zone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Agent_Visit" Member="Visits" ThisKey="idAgent" OtherKey="FK_agent" Type="Visit" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Visits" Member="Visits">
-    <Type Name="Visit">
-      <Column Name="idVisit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FK_agent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FK_reaction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="comment" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
-      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
-      <Association Name="Visit_Product" Member="Products" ThisKey="idVisit" OtherKey="FK_salesBook" Type="Product" />
-      <Association Name="Agent_Visit" Member="Agent" ThisKey="FK_agent" OtherKey="idAgent" Type="Agent" IsForeignKey="true" />
-      <Association Name="Client_Visit" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
-      <Association Name="Reaction_Visit" Member="Reaction" ThisKey="FK_reaction" OtherKey="idReaction" Type="Reaction" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Clients" Member="Clients">
     <Type Name="Client">
       <Column Name="idClient" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="lastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="creationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="speciality" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="potential" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -57,9 +20,12 @@
       <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="maxNumVisits" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FK_clientType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Client_Visit" Member="Visits" ThisKey="idClient" OtherKey="FK_client" Type="Visit" />
       <Association Name="ClientType_Client" Member="ClientType" ThisKey="FK_clientType" OtherKey="idClientType" Type="ClientType" IsForeignKey="true" />
+      <Association Name="User_Client" Member="User" ThisKey="FK_user" OtherKey="idUser" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ClientTypes" Member="ClientTypes">
@@ -72,10 +38,19 @@
   <Table Name="dbo.Products" Member="Products">
     <Type Name="Product">
       <Column Name="idProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FK_salesBook" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Visit_Product" Member="Visit" ThisKey="FK_salesBook" OtherKey="idVisit" Type="Visit" IsForeignKey="true" />
+      <Association Name="Product_ProductsPerVisit" Member="ProductsPerVisits" ThisKey="idProduct" OtherKey="FK_product" Type="ProductsPerVisit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductsPerVisit" Member="ProductsPerVisits">
+    <Type Name="ProductsPerVisit">
+      <Column Name="idProductPerVisit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FK_visit" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Product_ProductsPerVisit" Member="Product" ThisKey="FK_product" OtherKey="idProduct" Type="Product" IsForeignKey="true" />
+      <Association Name="Visit_ProductsPerVisit" Member="Visit" ThisKey="FK_visit" OtherKey="idVisit" Type="Visit" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Reactions" Member="Reactions">
@@ -83,6 +58,52 @@
       <Column Name="idReaction" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Reaction_Visit" Member="Visits" ThisKey="idReaction" OtherKey="FK_reaction" Type="Visit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="creationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="country" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address1" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="address2" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="zone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="phone1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="phone2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FK_userType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_Client" Member="Clients" ThisKey="idUser" OtherKey="FK_user" Type="Client" />
+      <Association Name="User_Visit" Member="Visits" ThisKey="idUser" OtherKey="FK_user" Type="Visit" />
+      <Association Name="UserType_User" Member="UserType" ThisKey="FK_userType" OtherKey="idAgentType" Type="UserType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserTypes" Member="UserTypes">
+    <Type Name="UserType">
+      <Column Name="idAgentType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="UserType_User" Member="Users" ThisKey="idAgentType" OtherKey="FK_userType" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Visits" Member="Visits">
+    <Type Name="Visit">
+      <Column Name="idVisit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FK_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_reaction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="comment" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="longitude" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Association Name="Visit_ProductsPerVisit" Member="ProductsPerVisits" ThisKey="idVisit" OtherKey="FK_visit" Type="ProductsPerVisit" />
+      <Association Name="Client_Visit" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
+      <Association Name="Reaction_Visit" Member="Reaction" ThisKey="FK_reaction" OtherKey="idReaction" Type="Reaction" IsForeignKey="true" />
+      <Association Name="User_Visit" Member="User" ThisKey="FK_user" OtherKey="idUser" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
