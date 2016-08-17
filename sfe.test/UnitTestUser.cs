@@ -41,7 +41,7 @@ namespace sfe.test
             user.idUser = 1;
             user.name = "Test4";
             user.lastName = "Test2";
-            user.username = "Tes2";
+            user.username = "test";
             user.password = "1234test";
             user.creationDate = new DateTime(2016, 02, 02);
             user.country = "Costa Rica";

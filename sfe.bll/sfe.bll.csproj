@@ -52,6 +52,7 @@
     <Compile Include="Exceptions\UpdateVisitException.cs" />
     <Compile Include="Exceptions\PostProductsPerVisitException.cs" />
     <Compile Include="Exceptions\ProductsPerVisitListNotFoundException.cs" />
+    <Compile Include="LoginLogic.cs" />
     <Compile Include="ProductsPerVisitLogic.cs" />
     <Compile Include="Exceptions\ProductsPerVisitNotFoundException.cs" />
     <Compile Include="Exceptions\UpdateProductsPerVisitException.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Exceptions\ReactionListNotFoundException.cs" />
     <Compile Include="ReactionLogic.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Exceptions\UserNotValidException.cs" />
     <Compile Include="VisitLogic.cs" />
   </ItemGroup>
   <ItemGroup>
