@@ -17,26 +17,43 @@ namespace sfe.test
             client.email = "test@test.com";
             client.active = true;
             client.FK_clientType = 1;
+            client.FK_user = 2;
+            client.maxNumVisits = 2;
             client.creationDate = new System.DateTime(2016,01,01);
-            bll.ClientLogic.Post(client);
+            bll.ClientLogic.Create(client);
         }
 
         [TestMethod]
         public void TestMethodGetClients()
         {
-            Assert.IsTrue(bll.ClientLogic.Get().Count > 0);
+            Assert.IsTrue(bll.ClientLogic.Read().Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetClient()
         {
-            Assert.IsNotNull(bll.ClientLogic.Get(1));
+            Assert.IsNotNull(bll.ClientLogic.Read(1));
         }
 
         [TestMethod]
         public void TestMethodDeleteClient()
         {
-            bll.ClientLogic.Delete(3);
+            bll.ClientLogic.Delete(1);
+        }
+
+        [TestMethod]
+        public void TestMethodPutClient()
+        {
+            client.idClient = 1;
+            client.name = "testUpdate";
+            client.lastName = "testUpdate";
+            client.country = "Costa Rica";
+            client.email = "test@test.com";
+            client.FK_clientType = 1;
+            client.active = true;
+            client.maxNumVisits = 5;
+            client.FK_user = 2;
+            bll.ClientLogic.Update(client);
         }
     }
 }

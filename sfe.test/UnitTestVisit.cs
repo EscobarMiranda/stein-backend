@@ -13,22 +13,32 @@ namespace sfe.test
             Visit visit = new Visit();
             visit.comment = "test comment";
             visit.date = new DateTime(2016,01,01);
-            visit.FK_agent = 1;
+            visit.FK_user = 1;
             visit.FK_client = 1;
             visit.FK_reaction = 1;
-            bll.VisitLogic.Post(visit);
+            bll.VisitLogic.Create(visit);
         }
 
         [TestMethod]
         public void TestMethodGetVisitList()
         {
-            Assert.IsTrue(bll.VisitLogic.Get().Count > 0);
+            Assert.IsTrue(bll.VisitLogic.Read().Count > 0);
         }
 
         [TestMethod]
         public void TestMethodGetVisit()
         {
-            Assert.IsNotNull(bll.VisitLogic.Get(1));
+            Assert.IsNotNull(bll.VisitLogic.Read(1));
+        }
+
+        [TestMethod]
+        public void TestMethodPutVisit()
+        {
+            Visit visit = new Visit();
+            visit.idVisit = 1;
+            visit.comment = "test comment update";
+            visit.FK_reaction = 2;
+            bll.VisitLogic.Update(visit);
         }
     }
 }

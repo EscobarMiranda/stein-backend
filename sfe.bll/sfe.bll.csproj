@@ -41,17 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\DeleteAgentException.cs" />
-    <Compile Include="Exceptions\DeleteClienException.cs" />
-    <Compile Include="Exceptions\AgentListNotFoundException.cs" />
-    <Compile Include="AgentLogic.cs" />
-    <Compile Include="Exceptions\AgentNotFoundException.cs" />
+    <Compile Include="Exceptions\DeleteClientException.cs" />
+    <Compile Include="Exceptions\DeleteUserException.cs" />
+    <Compile Include="Exceptions\PostUserException.cs" />
+    <Compile Include="Exceptions\UserListNotFoundException.cs" />
+    <Compile Include="Exceptions\UpdateClientException.cs" />
+    <Compile Include="Exceptions\PostClientException.cs" />
+    <Compile Include="Exceptions\UpdateProductException.cs" />
+    <Compile Include="Exceptions\UpdateUserException.cs" />
+    <Compile Include="Exceptions\UpdateVisitException.cs" />
+    <Compile Include="Exceptions\PostProductsPerVisitException.cs" />
+    <Compile Include="Exceptions\ProductsPerVisitListNotFoundException.cs" />
+    <Compile Include="ProductsPerVisitLogic.cs" />
+    <Compile Include="Exceptions\ProductsPerVisitNotFoundException.cs" />
+    <Compile Include="Exceptions\UpdateProductsPerVisitException.cs" />
+    <Compile Include="UserLogic.cs" />
     <Compile Include="ClientLogic.cs" />
     <Compile Include="Exceptions\ClientListNotFoundException.cs" />
     <Compile Include="Exceptions\ClientNotFoundException.cs" />
-    <Compile Include="Exceptions\PostClientException.cs" />
     <Compile Include="Exceptions\PostVisitException.cs" />
-    <Compile Include="Exceptions\PostAgentException.cs" />
     <Compile Include="Exceptions\ProductListNotFoundException.cs" />
     <Compile Include="Exceptions\PostProductException.cs" />
     <Compile Include="ProductLogic.cs" />
@@ -61,6 +69,7 @@
     <Compile Include="Exceptions\VisitNotFoundException.cs" />
     <Compile Include="Exceptions\ReactionListNotFoundException.cs" />
     <Compile Include="ReactionLogic.cs" />
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="VisitLogic.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace sfe.bll
+namespace sfe.bll.Exceptions
 {
     [Serializable]
     internal class VisitNotFoundException : Exception
