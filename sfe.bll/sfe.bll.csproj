@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ClientTypesListNotFoundException.cs" />
+    <Compile Include="ClientTypesLogic.cs" />
     <Compile Include="Exceptions\DeleteClientException.cs" />
     <Compile Include="Exceptions\DeleteUserException.cs" />
     <Compile Include="Exceptions\PostUserException.cs" />
