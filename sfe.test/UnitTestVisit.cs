@@ -13,7 +13,6 @@ namespace sfe.test
             Visit visit = new Visit();
             visit.comment = "test comment";
             visit.date = new DateTime(2016,01,01);
-            visit.FK_user = 1;
             visit.FK_client = 1;
             visit.FK_reaction = 1;
             bll.VisitLogic.Create(visit);

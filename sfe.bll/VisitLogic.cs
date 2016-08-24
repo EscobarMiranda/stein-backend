@@ -22,7 +22,7 @@ namespace sfe.bll
             catch (Exception e)
             {
                 EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
-                throw new VisitListNotFoundException("Visit list not founed");
+                throw new VisitListNotFoundException("Visit list not found");
             }
         }
 
@@ -31,13 +31,13 @@ namespace sfe.bll
             try
             {
                 return (from visits in db.Visits
-                        where visits.FK_user == idUser
+                        where visits.Client.FK_user == idUser
                         select visits).ToList();
             }
             catch (Exception e)
             {
                 EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
-                throw new VisitListNotFoundException("Visit list not founed");
+                throw new VisitListNotFoundException("Visit list not found");
             }
         }
 

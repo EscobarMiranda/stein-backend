@@ -19,6 +19,8 @@ namespace sfe.test
             client.FK_clientType = 1;
             client.FK_user = 2;
             client.maxNumVisits = 2;
+            client.FK_adoption = 1;
+            client.FK_potential = 1;
             client.creationDate = new System.DateTime(2016,01,01);
             bll.ClientLogic.Create(client);
         }

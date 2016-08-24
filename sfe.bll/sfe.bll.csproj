@@ -55,9 +55,12 @@
     <Compile Include="Exceptions\PostProductsPerVisitException.cs" />
     <Compile Include="Exceptions\ProductsPerVisitListNotFoundException.cs" />
     <Compile Include="LoginLogic.cs" />
+    <Compile Include="Exceptions\PostQuestionOptionsException.cs" />
     <Compile Include="ProductsPerVisitLogic.cs" />
     <Compile Include="Exceptions\ProductsPerVisitNotFoundException.cs" />
     <Compile Include="Exceptions\UpdateProductsPerVisitException.cs" />
+    <Compile Include="Exceptions\QuestionListNotFoundException.cs" />
+    <Compile Include="QuestionLogic.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="ClientLogic.cs" />
     <Compile Include="Exceptions\ClientListNotFoundException.cs" />
