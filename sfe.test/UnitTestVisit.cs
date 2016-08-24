@@ -32,6 +32,18 @@ namespace sfe.test
         }
 
         [TestMethod]
+        public void TestMethodGetVisitByUser()
+        {
+            Assert.IsTrue(bll.VisitLogic.ReadByUser(1).Count > 0);
+        }
+
+        [TestMethod]
+        public void TestMethodGetVisitByClient()
+        {
+            Assert.IsTrue(bll.VisitLogic.ReadByClient(1).Count > 0);
+        }
+
+        [TestMethod]
         public void TestMethodPutVisit()
         {
             Visit visit = new Visit();

@@ -26,12 +26,27 @@ namespace sfe.bll
             }
         }
 
-        public static List<Visit> ReadByUser(int userId)
+        public static List<Visit> ReadByUser(int idUser)
         {
             try
             {
                 return (from visits in db.Visits
-                        where visits.FK_user == userId
+                        where visits.FK_user == idUser
+                        select visits).ToList();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new VisitListNotFoundException("Visit list not founed");
+            }
+        }
+
+        public static List<Visit> ReadByClient(int idClient)
+        {
+            try
+            {
+                return (from visits in db.Visits
+                        where visits.FK_client == idClient
                         select visits).ToList();
             }
             catch (Exception e)
