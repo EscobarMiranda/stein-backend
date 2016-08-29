@@ -37,6 +37,12 @@ namespace sfe.api.Controllers
             return bll.VisitLogic.ReadByClient(idClient);
         }
 
+        // GET api/<controller>/5
+        public IEnumerable<Frequency> GetFrequencyByUser(int month, int type)
+        {
+            return bll.VisitLogic.ReadFrequencyByUser(month, type);
+        }
+
         // POST api/<controller>
         public void Post(Visit visit)
         {

@@ -26,6 +26,29 @@ namespace sfe.bll
             }
         }
 
+        public static List<Frequency> ReadFrequencyByUser(int month, int type)
+        {
+            var currentMonth = month;
+            List<Frequency> frecuencies = new List<Frequency>();
+            try
+            {
+                db.Visits.Where(v => v.date.Month == currentMonth).Where(v => v.FK_visitType == type).GroupBy(v => v.Client).ToList().ForEach
+                    (i => frecuencies.Add(new Frequency
+                    {
+                        idClient = i.Key.idClient,
+                        FK_clientType = i.Key.FK_clientType,
+                        fullName = i.Key.name + " " +  i.Key.lastName,
+                        frequency = i.Count()
+                    }));
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new VisitListNotFoundException("Visit list not found");
+            }
+            return frecuencies;
+        }
+
         public static List<Visit> ReadByUser(int idUser)
         {
             try

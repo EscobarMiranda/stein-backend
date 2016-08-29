@@ -31,6 +31,12 @@ namespace sfe.test
         }
 
         [TestMethod]
+        public void TestMethodGetFrequency()
+        {
+            Assert.IsNotNull(bll.VisitLogic.ReadFrequencyByUser(8, 1));
+        }
+
+        [TestMethod]
         public void TestMethodGetVisitByUser()
         {
             Assert.IsTrue(bll.VisitLogic.ReadByUser(1).Count > 0);
