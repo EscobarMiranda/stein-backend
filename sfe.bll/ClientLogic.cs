@@ -97,8 +97,8 @@ namespace sfe.bll
                 tmpClient.name = client.name;
                 tmpClient.lastName = client.lastName;
                 tmpClient.speciality = client.speciality;
-                tmpClient.potential = client.potential;
-                tmpClient.adoption = client.adoption;
+                tmpClient.FK_potential = client.FK_potential;
+                tmpClient.FK_potential = client.FK_potential;
                 tmpClient.country = client.country;
                 tmpClient.province = client.province;
                 tmpClient.address1 = client.address1;
