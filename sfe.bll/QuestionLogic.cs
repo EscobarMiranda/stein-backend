@@ -12,21 +12,12 @@ namespace sfe.bll
     public class QuestionLogic
     {
         private static DataClassesDataContext db = Database.Instance;
-        public static List<QuestionOptions> Read()
+        public static List<Question> Read()
         {
             try
             {
-                List<QuestionOptions> result = new List<QuestionOptions>();
-                List<Question> questionList = (from questions in db.Questions where questions.active == true
+                return (from questions in db.Questions where questions.active == true
                         select questions).ToList();
-                foreach (Question question in questionList)
-                {
-                    List<Option> tmpOptions = (from options in db.Options
-                                               where options.active == true
-                                               select options).ToList();
-                    result.Add(new QuestionOptions() { question = question, options = tmpOptions });
-                }
-                return result;
             }
             catch (Exception e)
             {
