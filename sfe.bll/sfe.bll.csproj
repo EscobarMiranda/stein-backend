@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\AnswerListNotFoundException.cs" />
+    <Compile Include="AnswerLogic.cs" />
     <Compile Include="Exceptions\ClientTypesListNotFoundException.cs" />
     <Compile Include="ClientTypesLogic.cs" />
     <Compile Include="Exceptions\DeleteClientException.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Exceptions\ProductsPerVisitListNotFoundException.cs" />
     <Compile Include="LoginLogic.cs" />
     <Compile Include="Exceptions\PostQuestionOptionsException.cs" />
+    <Compile Include="Exceptions\PostAnswersException.cs" />
     <Compile Include="ProductsPerVisitLogic.cs" />
     <Compile Include="Exceptions\ProductsPerVisitNotFoundException.cs" />
     <Compile Include="Exceptions\UpdateProductsPerVisitException.cs" />
