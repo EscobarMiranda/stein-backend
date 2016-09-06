@@ -17,11 +17,11 @@ namespace sfe.bll
         {
             try
             {
-                User tmpUser = (from User in db.Users
-                                where User.username == loginObject.username && 
-                                User.password == loginObject.password &&
-                                User.country == loginObject.country
-                                select User).Single();
+                User tmpUser = (from user in db.Users
+                                where user.username == loginObject.username && 
+                                user.password == loginObject.password &&
+                                user.country == loginObject.country
+                                select user).Single();
                 tmpUser.password = "";
                 return tmpUser;
             }
@@ -29,6 +29,24 @@ namespace sfe.bll
             {
                 EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
                 throw new UserNotValidException("User is not valid");
+            }
+        }
+
+        public static void ChangePassword(ChangePasswordData data)
+        {
+            try
+            {
+                User tmpUser = (from user in db.Users
+                                where user.username == data.username &&
+                                user.password == data.password
+                                select user).Single();
+                tmpUser.password = data.newPassword;
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                throw new ChangePasswordException("Error updating password");
             }
         }
     }
