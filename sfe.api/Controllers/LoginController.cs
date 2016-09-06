@@ -18,5 +18,11 @@ namespace sfe.api.Controllers
         {
             return bll.LoginLogic.Read(loginObject);
         }
+
+        // PUT api/<controller>
+        public void Put(ChangePasswordData data)
+        {
+            bll.LoginLogic.ChangePassword(data);
+        }
     }
 }

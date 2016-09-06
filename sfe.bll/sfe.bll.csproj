@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ChangePasswordException.cs" />
     <Compile Include="Exceptions\AnswerListNotFoundException.cs" />
     <Compile Include="AnswerLogic.cs" />
     <Compile Include="Exceptions\ClientTypesListNotFoundException.cs" />

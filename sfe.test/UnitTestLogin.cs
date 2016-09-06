@@ -12,7 +12,15 @@ namespace sfe.test
         [TestMethod]
         public void TestMethodLogin()
         {
-            Assert.IsNotNull(bll.LoginLogic.Read( new LoginData() { username = "test", password = "1234test", country = "Costa Rica" }));
+             
+            Assert.IsNotNull(bll.LoginLogic.Read( new LoginData() { username = "jperez", password = "Pernix123.", country = "Costa Rica" }));
+        }
+
+        [TestMethod]
+        public void TestMethodChangePassword()
+        {
+            bll.LoginLogic.ChangePassword(new ChangePasswordData() { username = "jperez", password = "Pernix123.", newPassword = "123.Pernix" });
+            Assert.IsNotNull(bll.LoginLogic.Read(new LoginData() { username = "jperez", password = "123.Pernix", country = "Costa Rica" }));
         }
     }
 }
