@@ -17,6 +17,7 @@
   <Table Name="dbo.Answers" Member="Answers">
     <Type Name="Answer">
       <Column Name="idAnswer" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="FK_option" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FK_client" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Client_Answer" Member="Client" ThisKey="FK_client" OtherKey="idClient" Type="Client" IsForeignKey="true" />
@@ -99,7 +100,7 @@
   <Table Name="dbo.Questions" Member="Questions">
     <Type Name="Question">
       <Column Name="idQuestion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="question" Storage="_question1" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="question" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Question_Option" Member="Options" ThisKey="idQuestion" OtherKey="FK_question" Type="Option" />
     </Type>

@@ -453,6 +453,8 @@ namespace sfe.dal
 		
 		private int _idAnswer;
 		
+		private System.DateTime _date;
+		
 		private int _FK_option;
 		
 		private int _FK_client;
@@ -467,6 +469,8 @@ namespace sfe.dal
     partial void OnCreated();
     partial void OnidAnswerChanging(int value);
     partial void OnidAnswerChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
     partial void OnFK_optionChanging(int value);
     partial void OnFK_optionChanged();
     partial void OnFK_clientChanging(int value);
@@ -496,6 +500,26 @@ namespace sfe.dal
 					this._idAnswer = value;
 					this.SendPropertyChanged("idAnswer");
 					this.OnidAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
 				}
 			}
 		}
@@ -2192,7 +2216,7 @@ namespace sfe.dal
 		
 		private int _idQuestion;
 		
-		private string _question1;
+		private string _question;
 		
 		private bool _active;
 		
@@ -2236,20 +2260,20 @@ namespace sfe.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_question1", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_question", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
 		public string question
 		{
 			get
 			{
-				return this._question1;
+				return this._question;
 			}
 			set
 			{
-				if ((this._question1 != value))
+				if ((this._question != value))
 				{
 					this.OnquestionChanging(value);
 					this.SendPropertyChanging();
-					this._question1 = value;
+					this._question = value;
 					this.SendPropertyChanged("question");
 					this.OnquestionChanged();
 				}

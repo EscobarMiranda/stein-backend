@@ -30,6 +30,7 @@ namespace sfe.bll
         {
             try
             {
+                answers.ForEach(i => i.date = DateTime.Today);
                 db.Answers.InsertAllOnSubmit(answers);
                 db.SubmitChanges();
             }
