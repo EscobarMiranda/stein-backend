@@ -1433,6 +1433,8 @@ namespace sfe.dal
 		
 		private string _name;
 		
+		private bool _hasProducts;
+		
 		private EntitySet<Client> _Clients;
 		
     #region Extensibility Method Definitions
@@ -1443,6 +1445,8 @@ namespace sfe.dal
     partial void OnidClientTypeChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
+    partial void OnhasProductsChanging(bool value);
+    partial void OnhasProductsChanged();
     #endregion
 		
 		public ClientType()
@@ -1487,6 +1491,26 @@ namespace sfe.dal
 					this._name = value;
 					this.SendPropertyChanged("name");
 					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hasProducts", DbType="Bit NOT NULL")]
+		public bool hasProducts
+		{
+			get
+			{
+				return this._hasProducts;
+			}
+			set
+			{
+				if ((this._hasProducts != value))
+				{
+					this.OnhasProductsChanging(value);
+					this.SendPropertyChanging();
+					this._hasProducts = value;
+					this.SendPropertyChanged("hasProducts");
+					this.OnhasProductsChanged();
 				}
 			}
 		}

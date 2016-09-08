@@ -59,6 +59,7 @@
     <Type Name="ClientType">
       <Column Name="idClientType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="hasProducts" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ClientType_Client" Member="Clients" ThisKey="idClientType" OtherKey="FK_clientType" Type="Client" />
     </Type>
   </Table>
