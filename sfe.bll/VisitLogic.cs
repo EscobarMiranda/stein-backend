@@ -26,13 +26,13 @@ namespace sfe.bll
             }
         }
 
-        public static List<Frequency> ReadFrequencyByUser(int month, int type)
+        public static List<Frequency> ReadFrequencyByUser(int month, int type, int IdUser)
         {
             var currentMonth = month;
             List<Frequency> frecuencies = new List<Frequency>();
-            try
+            try 
             {
-                db.Visits.Where(v => v.date.Month == currentMonth).Where(v => v.FK_visitType == type).GroupBy(v => v.Client).ToList().ForEach
+                db.Visits.Where(v => v.Client.FK_user == IdUser && v.FK_visitType == type && v.date.Month == currentMonth).GroupBy(v => v.Client).ToList().ForEach
                     (i => frecuencies.Add(new Frequency
                     {
                         idClient = i.Key.idClient,

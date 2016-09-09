@@ -33,7 +33,7 @@ namespace sfe.test
         [TestMethod]
         public void TestMethodGetFrequency()
         {
-            Assert.IsNotNull(bll.VisitLogic.ReadFrequencyByUser(8, 1));
+            Assert.IsNotNull(bll.VisitLogic.ReadFrequencyByUser(9, 1, 1));
         }
 
         [TestMethod]
