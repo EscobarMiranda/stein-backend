@@ -1,4 +1,5 @@
-﻿using sfe.bll.Exceptions;
+﻿using Newtonsoft.Json;
+using sfe.bll.Exceptions;
 using sfe.dal;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,23 @@ namespace sfe.bll
     public class ReactionLogic
     {
         private static DataClassesDataContext db = Database.Instance;
+        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
         public static List<Reaction> Read()
         {
             try
             {
-                return (from reactions in db.Reactions
-                        select reactions).ToList();
+                string json = JsonConvert.SerializeObject(db.Reactions.ToList(), settings);
+                List<Reaction> listReactionsTmp = JsonConvert.DeserializeObject<List<Reaction>>(json);
+                List<Reaction> listReactions = new List<Reaction>();
+                listReactionsTmp.ForEach(reactions => {
+                    reactions.Visits = null;
+                    listReactions.Add(reactions);
+                });
+                return listReactions;
             }
             catch (Exception e)
             {

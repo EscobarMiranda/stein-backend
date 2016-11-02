@@ -1,4 +1,5 @@
-﻿using sfe.bll.Exceptions;
+﻿using Newtonsoft.Json;
+using sfe.bll.Exceptions;
 using sfe.dal;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,29 @@ namespace sfe.bll
     public class VisitLogic
     {
         private static DataClassesDataContext db = Database.Instance;
+        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
         public static List<Visit> Read()
         {
             try
             {
-                return (from visits in db.Visits
-                        select visits).ToList();
+                //return (from visits in db.Visits
+                //        select visits).ToList();
+
+                string json = JsonConvert.SerializeObject(db.Visits.ToList(), settings);
+                List<Visit> listVisitsTmp = JsonConvert.DeserializeObject<List<Visit>>(json);
+                List<Visit> listVisits = new List<Visit>();
+                listVisitsTmp.ForEach(visits => {
+                    visits.Client = null;
+                    visits.Reaction = null;
+                    visits.ProductsPerVisits = null;
+                    visits.VisitType = null;
+                    listVisits.Add(visits);
+                });
+                return listVisits;
             }
             catch (Exception e)
             {
@@ -53,9 +71,17 @@ namespace sfe.bll
         {
             try
             {
-                return (from visits in db.Visits
-                        where visits.Client.FK_user == idUser
-                        select visits).ToList();
+                string json = JsonConvert.SerializeObject(db.Visits.Where(v => v.Client.FK_user == idUser).ToList(), settings);
+                List<Visit> listVisitsTmp = JsonConvert.DeserializeObject<List<Visit>>(json);
+                List<Visit> listVisits = new List<Visit>();
+                listVisitsTmp.ForEach(visits => {
+                    visits.Client = null;
+                    visits.Reaction = null;
+                    visits.ProductsPerVisits = null;
+                    visits.VisitType = null;
+                    listVisits.Add(visits);
+                });
+                return listVisits;
             }
             catch (Exception e)
             {
@@ -103,7 +129,8 @@ namespace sfe.bll
             }
             catch (Exception e)
             {
-                EventLog.WriteEntry("sfe", e.StackTrace.ToString(), EventLogEntryType.Error);
+                EventLog.WriteEntry("sfe", e.Message, EventLogEntryType.Error);
+                EventLog.WriteEntry("sfe", e.StackTrace, EventLogEntryType.Information);
                 throw new PostVisitException("Error creating visit");
             }
         }

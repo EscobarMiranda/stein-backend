@@ -1,4 +1,5 @@
-﻿using sfe.bll.Exceptions;
+﻿using Newtonsoft.Json;
+using sfe.bll.Exceptions;
 using sfe.dal;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,20 @@ namespace sfe.bll
     public class LoginLogic
     {
         private static DataClassesDataContext db = Database.Instance;
+        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
 
         public static User Read(LoginData loginObject)
         {
             try
             {
-                User tmpUser = (from user in db.Users
-                                where user.username == loginObject.username && 
-                                user.password == loginObject.password &&
-                                user.country == loginObject.country
-                                select user).Single();
-                tmpUser.password = "";
-                return tmpUser;
+                string json = JsonConvert.SerializeObject(db.Users.Where(u => u.username == loginObject.username && u.password == loginObject.password && u.country == loginObject.country).SingleOrDefault(), settings);
+                User user = JsonConvert.DeserializeObject<User>(json);
+                user.Clients = null;
+                return user;
             }
             catch (Exception e)
             {
@@ -36,11 +39,12 @@ namespace sfe.bll
         {
             try
             {
-                User tmpUser = (from user in db.Users
-                                where user.username == data.username &&
-                                user.password == data.password
-                                select user).Single();
-                tmpUser.password = data.newPassword;
+                var users = (db.Users
+                    .Where(u => u.username == data.username && u.password == data.password).SingleOrDefault());
+
+                User user = new User();
+                user = users;
+                user.password = data.newPassword;
                 db.SubmitChanges();
             }
             catch (Exception e)

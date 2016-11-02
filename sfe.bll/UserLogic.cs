@@ -1,4 +1,5 @@
-﻿using sfe.bll.Exceptions;
+﻿using Newtonsoft.Json;
+using sfe.bll.Exceptions;
 using sfe.dal;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,24 @@ namespace sfe.bll
     public class UserLogic
     {
         private static DataClassesDataContext db = Database.Instance;
+        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
         public static List<User> Read()
         {
             try
             {
-                return (from agents in db.Users
-                        where agents.active == true
-                        select agents).ToList();
+                string json = JsonConvert.SerializeObject(db.Users.Where(u => u.active == true).ToList(), settings);
+                List<User> listUsersTmp = JsonConvert.DeserializeObject<List<User>>(json);
+                List<User> listUsers = new List<User>();
+                listUsersTmp.ForEach(users => {
+                    users.Clients = null;
+                    listUsers.Add(users);
+                });
+                return listUsers;
+
             }
             catch (Exception e)
             {
