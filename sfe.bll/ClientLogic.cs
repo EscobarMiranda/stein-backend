@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using sfe.bll.Exceptions;
 using sfe.dal;
 using System;
@@ -13,13 +14,27 @@ namespace sfe.bll
     public class ClientLogic
     {
         private static DataClassesDataContext db = Database.Instance;
+        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
         public static List<Client> Read()
         {
             try
             {
-                return (from clients in db.Clients
-                        where clients.active == true
-                        select clients).ToList();
+                string json = JsonConvert.SerializeObject(db.Clients.ToList(), settings);
+                List<Client> listClientsTmp = JsonConvert.DeserializeObject<List<Client>>(json);
+                List<Client> listClients = new List<Client>();
+                listClientsTmp.ForEach(clients => {
+                    clients.Visits = null;
+                    clients.Potential = null;
+                    clients.Answers = null;
+                    clients.Adoption = null;
+                    clients.User = null;
+                    listClients.Add(clients);
+                });
+                return listClients;
             }
             catch (Exception e)
             {
@@ -32,11 +47,18 @@ namespace sfe.bll
         {
             try
             {
-                return (from clients in db.Clients
-                        where clients.active == true &&
-                        clients.FK_clientType == clientTypeId &&
-                        clients.FK_user == userId
-                        select clients).ToList();
+                string json = JsonConvert.SerializeObject(db.Clients.Where(c => c.active == true && c.FK_clientType == clientTypeId && c.FK_user == userId).ToList(), settings);
+                List<Client> listClientsTmp = JsonConvert.DeserializeObject<List<Client>>(json);
+                List<Client> listClients = new List<Client>();
+                listClientsTmp.ForEach(clients => {
+                    clients.Visits = null;
+                    clients.Potential = null;
+                    clients.Answers = null;
+                    clients.Adoption = null;
+                    clients.User = null;
+                    listClients.Add(clients);
+                });
+                return listClients;
             }
             catch (Exception e)
             {
@@ -49,9 +71,18 @@ namespace sfe.bll
         {
             try
             {
-                return (from client in db.Clients
-                        where client.idClient == id
-                        select client).Single();
+                string json = JsonConvert.SerializeObject(db.Clients.Where(c => c.idClient == id).ToList(), settings);
+                List<Client> listClientsTmp = JsonConvert.DeserializeObject<List<Client>>(json);
+                List<Client> listClients = new List<Client>();
+                listClientsTmp.ForEach(clients => {
+                    clients.Visits = null;
+                    clients.Potential = null;
+                    clients.Answers = null;
+                    clients.Adoption = null;
+                    clients.User = null;
+                    listClients.Add(clients);
+                });
+                return listClients.First();
             }
             catch (Exception e)
             {

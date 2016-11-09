@@ -15,6 +15,7 @@ namespace sfe.test
             visit.date = new DateTime(2016,01,01);
             visit.FK_client = 1;
             visit.FK_reaction = 1;
+            visit.FK_visitType = 1;
             bll.VisitLogic.Create(visit);
         }
 
